@@ -1,0 +1,4 @@
+neralind_user:
+    resource: "@NeralindUserBundle/Resources/config/routing.yml"
+    prefix:   /
+

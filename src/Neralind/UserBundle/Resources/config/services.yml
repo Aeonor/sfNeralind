@@ -1,0 +1,7 @@
+parameters:
+#    neralind_user.example.class: Neralind\UserBundle\Example
+
+services:
+#    neralind_user.example:
+#        class: %neralind_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
