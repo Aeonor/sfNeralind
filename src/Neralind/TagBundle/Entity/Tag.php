@@ -49,7 +49,26 @@ class Tag
      */
     private $caption;
 
-
+    /**
+    * @OneToOne(targetEntity="Word", inversedBy="principalTag")
+    * @JoinColumn(name="word_id", referencedColumnName="id")
+    */
+    private $principalWord;
+    
+    /**
+    * @OneToMany(targetEntity="Word", 
+    *           mappedBy="tag", 
+    *           cascade={"persist", "remove", "merge"}, 
+    *           orphanRemoval=true, 
+    *           nullable=true)
+    */
+    public $words;
+    
+    /**
+    * @ManyToOne(targetEntity="Cart", cascade={"all"}, fetch="EAGER")
+    */
+    private $cart;
+    
     /**
      * Get id
      *
