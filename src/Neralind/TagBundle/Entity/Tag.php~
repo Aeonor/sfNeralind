@@ -50,7 +50,7 @@ class Tag
     private $caption;
 
     /**
-    * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
+    * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag")
     * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
     */
     private $principalWord;
