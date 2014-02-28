@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Neralind\UserBundle\NeralindUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Neralind\TagBundle\NeralindTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

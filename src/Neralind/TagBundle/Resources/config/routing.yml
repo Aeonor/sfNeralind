@@ -1,0 +1,3 @@
+neralind_tag_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: NeralindTagBundle:Default:index }
