@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tag
  *
- * @ORM\Table()
+ * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="Neralind\TagBundle\Entity\TagRepository")
  */
 class Tag
@@ -50,7 +50,7 @@ class Tag
     private $caption;
 
     /**
-    * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag")
+    * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
     * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
     */
     private $principalWord;

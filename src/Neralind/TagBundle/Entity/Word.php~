@@ -38,12 +38,12 @@ class Word {
   private $slug;
 
   /**
-   * @ORM\OneToOne(targetEntity="Tag", mappedBy="principalWord")
+   * @ORM\OneToOne(targetEntity="Tag", mappedBy="principalWord", fetch="EAGER")
    */
   private $principalTag;
 
   /**
-   * @ORM\ManyToOne(targetEntity="Tag", inversedBy="redirectionWords")
+   * @ORM\ManyToOne(targetEntity="Tag", inversedBy="redirectionWords", fetch="EAGER")
    * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
    */
   private $redirectedTag;
