@@ -1,3 +1,7 @@
 neralind_tag_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: NeralindTagBundle:Default:index }
+    
+neralind_tag_tags:
+    resource: "@NeralindTagBundle/Resources/config/routing/tag.yml"
+    prefix:   /tag
