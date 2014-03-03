@@ -112,7 +112,11 @@ fos_user:
     
 stof_doctrine_extensions:
     default_locale: fr_FR
-
+    orm:
+      default:
+        timestampable: true
+        sortable: true
+        softdeleteable: true
     # Only used if you activated the Uploadable extension
     uploadable:
         # Default file path: This is one of the three ways you can configure the path for the Uploadable extension

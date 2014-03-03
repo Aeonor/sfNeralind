@@ -58,7 +58,7 @@ class Tag
     /**
     * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag")
     */
-    public $redirectionWords;
+    private $redirectionWords;
  
     
     /**
