@@ -4,6 +4,7 @@ namespace Neralind\TagBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Neralind\TagBundle\Validator\Constraints as NeralindTagAsserts;
 
 /**
  * Tag
@@ -39,6 +40,7 @@ class Tag
      *      minMessage = "tag.error.weight.min",
      *      maxMessage = "tag.error.weight.max"
      * )
+     * @Assert\NotBlank()
      */
     private $initialWeight;
 
@@ -46,17 +48,20 @@ class Tag
      * @var text
      *
      * @ORM\Column(name="caption", type="text", length=255)
+     * @Assert\NotBlank()
      */
     private $caption;
 
     /**
     * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
     * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
+    * @NeralindTagAsserts\NoRelationWord()
     */
     private $principalWord;
     
     /**
     * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag")
+    * @NeralindTagAsserts\NoRelationWord()
     */
     private $redirectionWords;
  

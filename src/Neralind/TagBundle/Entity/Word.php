@@ -4,6 +4,7 @@ namespace Neralind\TagBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Word
@@ -26,6 +27,14 @@ class Word {
    * @var string
    *
    * @ORM\Column(name="name", type="string", length=50, unique=true)
+   * @Assert\Length(
+   *      min = "3",
+   *      max = "50",
+   *      maxMessage = "word.error.length.max",
+   *      minMessage = "word.error.length.max"
+   * )
+   * @Assert\Regex("/^([a-zA-Z0-9_-]+)/")
+   * @Assert\NotBlank()
    */
   private $name;
 
@@ -146,6 +155,10 @@ class Word {
    */
   public function getRedirectedTag() {
     return $this->redirectedTag;
+  }
+  
+  public function __toString() {
+      return $this->name;
   }
 
 }

@@ -2,6 +2,8 @@ parameters:
 #    neralind_tag.example.class: Neralind\TagBundle\Example
 
 services:
-#    neralind_tag.example:
-#        class: %neralind_tag.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+   validator.NoRelationWordValidator:
+        class: Neralind\TagBundle\Validator\Constraints\NoRelationWordValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: NoRelationWordValidator }
