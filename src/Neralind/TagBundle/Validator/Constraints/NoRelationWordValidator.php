@@ -18,6 +18,7 @@ class NoRelationWordValidator extends ConstraintValidator{
     
     public function validate($value, Constraint $constraint)
     {
+        var_dump($value);
         $words = ( $value instanceOf ArrayCollection ) ? $value : new ArrayCollection(array($value));
         $inRelationShip = array();
         
