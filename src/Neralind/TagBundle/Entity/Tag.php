@@ -222,4 +222,70 @@ class Tag
     {
         return $this->redirectionWords;
     }
+
+    /**
+     * Add linkedTags
+     *
+     * @param \Neralind\TagBundle\Entity\Tag $linkedTags
+     * @return Tag
+     */
+    public function addLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags)
+    {
+        $this->linkedTags[] = $linkedTags;
+
+        return $this;
+    }
+
+    /**
+     * Remove linkedTags
+     *
+     * @param \Neralind\TagBundle\Entity\Tag $linkedTags
+     */
+    public function removeLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags)
+    {
+        $this->linkedTags->removeElement($linkedTags);
+    }
+
+    /**
+     * Get linkedTags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLinkedTags()
+    {
+        return $this->linkedTags;
+    }
+
+    /**
+     * Add tagsLinked
+     *
+     * @param \Neralind\TagBundle\Entity\Tag $tagsLinked
+     * @return Tag
+     */
+    public function addTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
+    {
+        $this->tagsLinked[] = $tagsLinked;
+
+        return $this;
+    }
+
+    /**
+     * Remove tagsLinked
+     *
+     * @param \Neralind\TagBundle\Entity\Tag $tagsLinked
+     */
+    public function removeTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
+    {
+        $this->tagsLinked->removeElement($tagsLinked);
+    }
+
+    /**
+     * Get tagsLinked
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTagsLinked()
+    {
+        return $this->tagsLinked;
+    }
 }
