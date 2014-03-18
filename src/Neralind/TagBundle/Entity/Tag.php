@@ -12,8 +12,8 @@ use Neralind\TagBundle\Validator\Constraints as NeralindTagAsserts;
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="Neralind\TagBundle\Entity\TagRepository")
  */
-class Tag
-{
+class Tag {
+
     /**
      * @var integer
      *
@@ -53,21 +53,21 @@ class Tag
     private $caption;
 
     /**
-    * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
-    * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
-    * @NeralindTagAsserts\NoRelationWord()
-    */
+     * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
+     * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
+     * @NeralindTagAsserts\NoRelationWord()
+     */
     private $principalWord;
-    
+
     /**
-    * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag")
-    * @NeralindTagAsserts\NoRelationWord()
-    */
+     * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag")
+     * @NeralindTagAsserts\NoRelationWord()
+     */
     private $redirectionWords;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Tag", mappedBy="tagsLinked")
-     **/
+     * */
     private $linkedTags;
 
     /**
@@ -76,18 +76,24 @@ class Tag
      *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="linkedtag_id", referencedColumnName="id")}
      *      )
-     **/
+     * */
     private $tagsLinked;
 
- 
-    
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->redirectionWords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->linkedTags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tagsLinked = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -97,8 +103,7 @@ class Tag
      * @param integer $weight
      * @return Tag
      */
-    public function setWeight($weight)
-    {
+    public function setWeight($weight) {
         $this->weight = $weight;
 
         return $this;
@@ -109,8 +114,7 @@ class Tag
      *
      * @return integer 
      */
-    public function getWeight()
-    {
+    public function getWeight() {
         return $this->weight;
     }
 
@@ -120,8 +124,7 @@ class Tag
      * @param integer $initialWeight
      * @return Tag
      */
-    public function setInitialWeight($initialWeight)
-    {
+    public function setInitialWeight($initialWeight) {
         $this->initialWeight = $initialWeight;
 
         return $this;
@@ -132,8 +135,7 @@ class Tag
      *
      * @return integer 
      */
-    public function getInitialWeight()
-    {
+    public function getInitialWeight() {
         return $this->initialWeight;
     }
 
@@ -143,8 +145,7 @@ class Tag
      * @param string $caption
      * @return Tag
      */
-    public function setCaption($caption)
-    {
+    public function setCaption($caption) {
         $this->caption = $caption;
 
         return $this;
@@ -155,16 +156,8 @@ class Tag
      *
      * @return string 
      */
-    public function getCaption()
-    {
+    public function getCaption() {
         return $this->caption;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->redirectionWords = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -173,8 +166,7 @@ class Tag
      * @param \Neralind\TagBundle\Entity\Word $principalWord
      * @return Tag
      */
-    public function setPrincipalWord(\Neralind\TagBundle\Entity\Word $principalWord = null)
-    {
+    public function setPrincipalWord(\Neralind\TagBundle\Entity\Word $principalWord = null) {
         $this->principalWord = $principalWord;
 
         return $this;
@@ -185,8 +177,7 @@ class Tag
      *
      * @return \Neralind\TagBundle\Entity\Word 
      */
-    public function getPrincipalWord()
-    {
+    public function getPrincipalWord() {
         return $this->principalWord;
     }
 
@@ -196,8 +187,7 @@ class Tag
      * @param \Neralind\TagBundle\Entity\Word $redirectionWords
      * @return Tag
      */
-    public function addRedirectionWord(\Neralind\TagBundle\Entity\Word $redirectionWords)
-    {
+    public function addRedirectionWord(\Neralind\TagBundle\Entity\Word $redirectionWords) {
         $this->redirectionWords[] = $redirectionWords;
 
         return $this;
@@ -208,8 +198,7 @@ class Tag
      *
      * @param \Neralind\TagBundle\Entity\Word $redirectionWords
      */
-    public function removeRedirectionWord(\Neralind\TagBundle\Entity\Word $redirectionWords)
-    {
+    public function removeRedirectionWord(\Neralind\TagBundle\Entity\Word $redirectionWords) {
         $this->redirectionWords->removeElement($redirectionWords);
     }
 
@@ -218,8 +207,7 @@ class Tag
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRedirectionWords()
-    {
+    public function getRedirectionWords() {
         return $this->redirectionWords;
     }
 
@@ -229,9 +217,10 @@ class Tag
      * @param \Neralind\TagBundle\Entity\Tag $linkedTags
      * @return Tag
      */
-    public function addLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags)
-    {
-        $this->linkedTags[] = $linkedTags;
+    public function addLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags) {
+        if (!$this->linkedTags->contains($linkedTags) && !$this->tagsLinked->contains($linkedTags)) {
+            $this->linkedTags[] = $linkedTags;
+        }
 
         return $this;
     }
@@ -241,9 +230,9 @@ class Tag
      *
      * @param \Neralind\TagBundle\Entity\Tag $linkedTags
      */
-    public function removeLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags)
-    {
+    public function removeLinkedTag(\Neralind\TagBundle\Entity\Tag $linkedTags) {
         $this->linkedTags->removeElement($linkedTags);
+        $this->tagsLinked->removeElement($linkedTags);
     }
 
     /**
@@ -251,9 +240,9 @@ class Tag
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getLinkedTags()
-    {
-        return $this->linkedTags;
+    public function getLinkedTags() {
+        $join = array_merge($this->linkedTags->toArray(), $this->tagsLinked->toArray());
+        return new \Doctrine\Common\Collections\ArrayCollection($join);
     }
 
     /**
@@ -261,31 +250,32 @@ class Tag
      *
      * @param \Neralind\TagBundle\Entity\Tag $tagsLinked
      * @return Tag
-     */
-    public function addTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
-    {
-        $this->tagsLinked[] = $tagsLinked;
 
-        return $this;
-    }
+      public function addTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
+      {
+      $this->tagsLinked[] = $tagsLinked;
 
-    /**
+      return $this;
+      }
+
+      /**
      * Remove tagsLinked
      *
      * @param \Neralind\TagBundle\Entity\Tag $tagsLinked
+
+      public function removeTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
+      {
+      $this->tagsLinked->removeElement($tagsLinked);
+      }
      */
-    public function removeTagsLinked(\Neralind\TagBundle\Entity\Tag $tagsLinked)
-    {
-        $this->tagsLinked->removeElement($tagsLinked);
-    }
 
     /**
      * Get tagsLinked
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTagsLinked()
-    {
+    public function getTagsLinked() {
         return $this->tagsLinked;
     }
+
 }
