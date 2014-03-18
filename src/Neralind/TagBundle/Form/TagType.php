@@ -19,6 +19,7 @@ class TagType extends AbstractType
             //->add('weight')
             ->add('caption')
             ->add('initialWeight')
+            ->add('redirectionWords')
             ->add('linkedTags')
          //   ->add('tagsLinked')
         ;
