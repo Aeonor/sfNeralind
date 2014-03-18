@@ -267,15 +267,15 @@ class Tag {
       {
       $this->tagsLinked->removeElement($tagsLinked);
       }
-     */
+     
 
     /**
      * Get tagsLinked
      *
      * @return \Doctrine\Common\Collections\Collection 
-     */
+     
     public function getTagsLinked() {
         return $this->tagsLinked;
     }
-
+*/
 }

@@ -15,12 +15,12 @@ class TagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('weight')
-            ->add('initialWeight')
-            ->add('caption')
             ->add('principalWord')
+            //->add('weight')
+            ->add('caption')
+            ->add('initialWeight')
             ->add('linkedTags')
-            ->add('tagsLinked')
+         //   ->add('tagsLinked')
         ;
     }
     
