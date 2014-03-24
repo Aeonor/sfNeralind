@@ -157,6 +157,7 @@ class Word {
     return $this->redirectedTag;
   }
   
+ 
   public function __toString() {
       return $this->name;
   }

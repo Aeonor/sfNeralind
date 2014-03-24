@@ -53,6 +53,7 @@ class WordsToTextareaTransformer implements DataTransformerInterface {
         if (!$textarea) {
             return null;
         }
+        var_dump($this);
 
         // EXPLODE
         $textarea = str_replace(';', ',', $textarea);
