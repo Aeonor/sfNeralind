@@ -26,7 +26,7 @@ class Tag {
     /**
      * @var integer
      *
-     * @ORM\Column(name="weight", type="integer",options={"unsigned"=true})
+     * @ORM\Column(name="weight", type="integer",options={"unsigned"=true, "default"=0})
      */
     private $weight;
 
@@ -53,20 +53,20 @@ class Tag {
     private $caption;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Neralind\ResourceBundle\Entity\Resource")
+     * @ORM\ManyToOne(targetEntity="Neralind\ResourceBundle\Entity\ResourceImage")
      * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
      */
     private $picture;
 
     /**
-     * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
      * @NeralindTagAsserts\NoRelationWord()
      */
     private $principalWord;
 
     /**
-     * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag")
+     * @ORM\OneToMany(targetEntity="Word", mappedBy="redirectedTag", cascade={"persist"})
      * @NeralindTagAsserts\NoRelationWord()
      */
     private $redirectionWords;
@@ -92,6 +92,7 @@ class Tag {
         $this->redirectionWords = new \Doctrine\Common\Collections\ArrayCollection();
         $this->linkedTags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tagsLinked = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->weight = 0;
     }
 
     /**
@@ -291,7 +292,7 @@ class Tag {
      * @param \Neralind\TagBundle\Entity\Resource $picture
      * @return Tag
      */
-    public function setPicture(\Neralind\TagBundle\Entity\Resource $picture = null)
+    public function setPicture(\Neralind\TagBundle\Entity\ResourceImage $picture = null)
     {
         $this->picture = $picture;
 
@@ -306,5 +307,9 @@ class Tag {
     public function getPicture()
     {
         return $this->picture;
+    }
+    
+    public function __toString() {
+        return $this->getPrincipalWord()->getName();
     }
 }

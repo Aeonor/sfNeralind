@@ -7,3 +7,15 @@ services:
         arguments: [@doctrine.orm.entity_manager]
         tags:
             - { name: validator.constraint_validator, alias: NoRelationWordValidator }
+
+   neralind_tag.type.word_selector:
+        class: Neralind\TagBundle\Form\Type\WordSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: word_selector }
+
+   neralind_tag.type.words_selector:
+        class: Neralind\TagBundle\Form\Type\WordsSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: words_selector }

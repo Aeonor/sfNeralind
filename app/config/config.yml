@@ -117,6 +117,7 @@ stof_doctrine_extensions:
         timestampable: true
         sortable: true
         softdeleteable: true
+        sluggable: true
     # Only used if you activated the Uploadable extension
     uploadable:
         # Default file path: This is one of the three ways you can configure the path for the Uploadable extension
@@ -127,4 +128,3 @@ stof_doctrine_extensions:
 
         # Default file info class implementing FileInfoInterface: Optional. By default we provide a class which is prepared to receive an UploadedFile instance.
         default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
-

@@ -41,8 +41,8 @@ class Word {
   /**
    * @var string
    *
-   * @ORM\Column(name="slug", type="string", length=255, unique=true)
    * @Gedmo\Slug(fields={"name"})
+   * @ORM\Column(name="slug", length=128, unique=true)
    */
   private $slug;
 
