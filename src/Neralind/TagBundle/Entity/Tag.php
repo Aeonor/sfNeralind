@@ -51,6 +51,12 @@ class Tag {
      * @Assert\NotBlank()
      */
     private $caption;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Neralind\ResourceBundle\Entity\Resource")
+     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     */
+    private $picture;
 
     /**
      * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
@@ -278,4 +284,27 @@ class Tag {
         return $this->tagsLinked;
     }
 */
+
+    /**
+     * Set picture
+     *
+     * @param \Neralind\TagBundle\Entity\Resource $picture
+     * @return Tag
+     */
+    public function setPicture(\Neralind\TagBundle\Entity\Resource $picture = null)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return \Neralind\TagBundle\Entity\Resource 
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
 }

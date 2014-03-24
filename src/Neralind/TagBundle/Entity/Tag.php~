@@ -51,6 +51,12 @@ class Tag {
      * @Assert\NotBlank()
      */
     private $caption;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Resource")
+     * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
+     */
+    private $picture;
 
     /**
      * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER")
@@ -78,6 +84,15 @@ class Tag {
      *      )
      * */
     private $tagsLinked;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->redirectionWords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->linkedTags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tagsLinked = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -149,13 +164,6 @@ class Tag {
      */
     public function getCaption() {
         return $this->caption;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct() {
-        $this->redirectionWords = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -240,7 +248,7 @@ class Tag {
      */
     public function getLinkedTags() {
         $join = array_merge($this->linkedTags->toArray(), $this->tagsLinked->toArray());
-        return new \Doctrine\Common\Collections\Collection($join);
+        return new \Doctrine\Common\Collections\ArrayCollection($join);
     }
 
     /**
@@ -265,14 +273,15 @@ class Tag {
       {
       $this->tagsLinked->removeElement($tagsLinked);
       }
+     
 
-      /**
+    /**
      * Get tagsLinked
      *
      * @return \Doctrine\Common\Collections\Collection 
-
-      public function getTagsLinked()
-      {
-      return $this->tagsLinked;
-      } */
+     
+    public function getTagsLinked() {
+        return $this->tagsLinked;
+    }
+*/
 }
