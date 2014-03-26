@@ -7,7 +7,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
 use Neralind\TagBundle\Entity\Word;
 
-class WordsToTextareaTransformer implements DataTransformerInterface {
+class TagsToTextareaTransformer implements DataTransformerInterface {
 
     /**
      * @var ObjectManager
@@ -22,20 +22,20 @@ class WordsToTextareaTransformer implements DataTransformerInterface {
     }
 
     /**
-     * Transforms an object (list of word) to a string (textarea).
+     * Transforms an object (list of tags) to a string (textarea).
      *
-     * @param  Words|null $words
+     * @param  Tags|null $tags
      * @return string
      */
-    public function transform($words) {
-        if (null === $words || empty($words)) {
+    public function transform($tags) {
+        if (null === $tags || empty($tags)) {
             return "";
         }
 
         $texts = array();
-        if (is_array($words)) {
-            foreach ($words AS $word) {
-                $texts[] = $word->getName();
+        if (is_array($tags)) {
+            foreach ($tags AS $tag) {
+                $texts[] = $tag->getName();
             }
         }
 
@@ -53,29 +53,30 @@ class WordsToTextareaTransformer implements DataTransformerInterface {
         if (!$textarea) {
             return null;
         }
-        
+
 
         // EXPLODE
         $textarea = str_replace(';', ',', $textarea);
         $texts = explode(',', $textarea);
 
-        $words = array();
+        $tags = array();
         foreach ($texts AS $text) {
             $text = trim($text);
             if (!empty($text)) {
-                $word = $this->om
+                $tag = $this->om
                         ->getRepository('NeralindTagBundle:Word')
                         ->findOneBy(array('name' => $text));
 
-                if (null === $word) {
-                    $word = new Word();
-                    $word->setName($text);
+                if (null === $tag) {
+                    throw new TransformationFailedException(sprintf(
+                            'Le tag %s% ne peut pas être trouvé', $text
+                    ));
                 }
-                $words[] = $word;
+                $tags[] = $tag;
             }
         }
 
-        return new \Doctrine\Common\Collections\ArrayCollection($words);
+        return new \Doctrine\Common\Collections\ArrayCollection($tags);
     }
 
 }

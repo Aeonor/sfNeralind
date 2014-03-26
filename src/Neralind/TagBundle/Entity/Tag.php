@@ -195,7 +195,7 @@ class Tag {
      * @return Tag
      */
     public function addRedirectionWord(\Neralind\TagBundle\Entity\Word $redirectionWords) {
-
+        $redirectionWords->setRedirectedTag($this); // Owning side
         $this->redirectionWords[] = $redirectionWords;
 
         return $this;
@@ -215,8 +215,9 @@ class Tag {
      * @return Tag
      */
     public function setRedirectionWords(\Doctrine\Common\Collections\Collection $redirectionWords) {
+      
         foreach ($redirectionWords as $redirectionWord) {
-            $redirectionWord->setRedirectedTag($this); // Owning side
+            $this->setRedirectedTag($this); // Owning side
         }
 
         $this->redirectionWords = $redirectionWords;
@@ -286,9 +287,13 @@ class Tag {
     public function getPicture() {
         return $this->picture;
     }
+    
+    public function getName() {
+        return $this->getPrincipalWord()->getName();
+    }
 
     public function __toString() {
-        return $this->getPrincipalWord()->getName();
+        return $this->getName();
     }
 
 }

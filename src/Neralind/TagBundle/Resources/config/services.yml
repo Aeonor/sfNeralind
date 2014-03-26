@@ -19,3 +19,9 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: words_selector }
+
+   neralind_tag.type.tags_selector:
+        class: Neralind\TagBundle\Form\Type\TagsSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: tags_selector }

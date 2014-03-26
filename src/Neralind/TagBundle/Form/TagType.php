@@ -20,7 +20,7 @@ class TagType extends AbstractType
             ->add('picture')
             ->add('initialWeight')
             ->add('redirectionWords', 'words_selector', array('by_reference' => false))
-            ->add('linkedTags')
+            ->add('linkedTags', 'tags_selector')
         ;
     }
     
