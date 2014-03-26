@@ -272,7 +272,7 @@ class Tag {
      * @param \Neralind\TagBundle\Entity\Resource $picture
      * @return Tag
      */
-    public function setPicture(\Neralind\TagBundle\Entity\ResourceImage $picture = null) {
+    public function setPicture(\Neralind\ResourceBundle\Entity\ResourceImage $picture = null) {
         $this->picture = $picture;
 
         return $this;
