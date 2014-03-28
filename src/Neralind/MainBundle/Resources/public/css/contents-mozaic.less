@@ -1,0 +1,91 @@
+.contents.mozaic {
+    @margin: 15px;
+    @item-height: 13.5em;
+    @item-big-height: 24em;
+
+    > ul {
+        .list-unstyled();
+        .make-row(@margin);
+        > li {
+            .make-md-column(2.4, @margin);         
+            a {
+                display: block; 
+                position: relative;
+                text-decoration: none;
+                height: @item-height; 
+                line-height: @item-height;
+                margin-bottom: @margin;
+                text-align: center; 
+
+                article {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                }
+
+                .recto, .verso {
+                  position: absolute;
+                  width: 100%;
+                  height: 100%; 
+                  top: 0; 
+                  left: 0;
+                }
+
+                .recto {
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;    
+                    .opacity { background: @color-black-little-opacity; }
+                }
+
+                .verso {
+                     .opacity(0); .transition();
+                    background: @purple-light;
+                    padding: 10px;
+                    .font-size(.9em);
+                    line-height: 1.3em;
+                    color: @color-foreground;
+                }
+
+                &:hover {
+                    .verso { 
+                      .opacity(.99);
+                    }
+                }
+
+
+            }
+
+            
+            h4 {
+                display: inline-block;
+                width: 100%;
+                margin: 0;
+                padding: 0 10px;
+                word-wrap: break-word;
+                vertical-align: middle;
+                .uppercase();
+                .font-size(1.6em);
+                line-height: 1.5em;
+                .textshadow();
+                color: @color-foreground;
+            }
+
+            &.big {
+                .make-md-column(4, @margin);
+                a {
+                    height: @item-big-height;
+                    line-height: @item-big-height;
+                }
+                .verso {
+                    .font-size(1.4em);
+                    padding: 20px;
+                }
+                h4 {
+                    .font-size(2.3em);
+                    line-height: 2em;
+                }
+            }
+        }
+    }
+}

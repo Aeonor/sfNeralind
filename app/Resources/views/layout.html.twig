@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <meta name="application-name" content="Neralind"/>
+        <meta name="description" content="Neralind.com " />
+        <title>Neralind.com{% if title is defined %} {{ title|striptags }}{% endif %}</title>
+
+        {% stylesheets '@NeralindMainBundle/Resources/public/css/styles.less' output='css/styles.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %} 
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="image_src" href="/img/neralind-icon.png" />
+        <link rel="icon" type="image/png" href="/img/neralind-icon.png" />
+        <link rel="canonical" href="http://www.neralind.com"/>
+    </head>
+    <body{% if bodyClass is defined %} class="{{ bodyClass }}"{% endif %}>
+        {% include 'layout-header.html.twig' %}
+        {% block body %}{% endblock %}
+            {% include 'layout-footer.html.twig' %}
+
+        {% block javascripts %}{% endblock %}
+        </body>
+    </html>

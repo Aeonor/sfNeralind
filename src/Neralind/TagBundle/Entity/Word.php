@@ -5,6 +5,7 @@ namespace Neralind\TagBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Neralind\TagBundle\Validator\Constraints as NeralindTagAsserts;
 
 /**
  * Word
@@ -113,12 +114,9 @@ class Word {
    *
    * @param \Neralind\TagBundle\Entity\Tag $principalTag
    * @return Word
+   * @NeralindTagAsserts\NoRelationWord(message = "word.error.norelation")
    */
-  public function setPrincipalTag(\Neralind\TagBundle\Entity\Tag $principalTag = null) {
-    if ($this->redirectedTag != null) {
-      throw new Neralind\TagBundle\Exception\TagUnicityException(0, "tag.error.unicity");
-    }
-
+  public function setPrincipalTag(\Neralind\TagBundle\Entity\Tag $principalTag = null) { 
     $this->principalTag = $principalTag;
     return $this;
   }
@@ -137,12 +135,9 @@ class Word {
    *
    * @param \Neralind\TagBundle\Entity\Tag $redirectedTag
    * @return Word
+   * @NeralindTagAsserts\NoRelationWord(message = "word.error.norelation")
    */
   public function setRedirectedTag(\Neralind\TagBundle\Entity\Tag $redirectedTag = null) {
-    if ($this->principalTag != null) {
-      throw new Neralind\TagBundle\Exception\TagUnicityException(0, "tag.error.unicity");
-    }
-
     $this->redirectedTag = $redirectedTag;
 
     return $this;
@@ -151,10 +146,18 @@ class Word {
   /**
    * Get redirectedTag
    *
-   * @return \Neralind\TagBundle\Entity\Tag 
-   */
+   * @return \Neralind\TagBundle\Entity\Tag  
+  */
   public function getRedirectedTag() {
     return $this->redirectedTag;
+  }
+  
+  /**
+   * Get principalTag or redirectedTag
+   */
+  public function getTag() {
+      if ( $this->principalTag != null ) return $this->getPrincipalTag();
+      else return $this->getRedirectedTag();
   }
   
  

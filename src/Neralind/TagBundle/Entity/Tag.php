@@ -78,7 +78,7 @@ class Tag {
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="linkedTags")
-     * @ORM\JoinTable(name="related_tags",
+     * @ORM\JoinTable(name="taglinked",
      *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="linkedtag_id", referencedColumnName="id")}
      *      )

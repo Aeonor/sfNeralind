@@ -54,7 +54,6 @@ class TagsToTextareaTransformer implements DataTransformerInterface {
             return null;
         }
 
-
         // EXPLODE
         $textarea = str_replace(';', ',', $textarea);
         $texts = explode(',', $textarea);
@@ -63,16 +62,16 @@ class TagsToTextareaTransformer implements DataTransformerInterface {
         foreach ($texts AS $text) {
             $text = trim($text);
             if (!empty($text)) {
-                $tag = $this->om
+                $word = $this->om
                         ->getRepository('NeralindTagBundle:Word')
                         ->findOneBy(array('name' => $text));
 
-                if (null === $tag) {
+                if (null === $word || null === $word->getPrincipalTag()) {
                     throw new TransformationFailedException(sprintf(
-                            'Le tag %s% ne peut pas être trouvé', $text
+                            'Le tag %s ne peut pas être trouvé', $text
                     ));
                 }
-                $tags[] = $tag;
+                $tags[] = $word->getTag();
             }
         }
 

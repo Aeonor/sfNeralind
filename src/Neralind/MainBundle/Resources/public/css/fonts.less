@@ -1,0 +1,120 @@
+
+// Weight
+// --------------------------------------------------
+.normal {
+  font-weight: 300;
+}
+
+.semi-bold {
+  font-weight: 400;
+}
+
+.strong, strong {
+  font-weight: 700;
+}
+
+.em, em {
+  font-style: italic;
+}
+
+// Titles
+// --------------------------------------------------
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  .font-title();
+  .semi-bold();
+  color: @color-subheading;
+}
+
+h1,h2,
+.h1,.h2 {
+  .uppercase();
+}
+
+h1,h2,h3,
+.h1,.h2,.h3 {
+  margin-top: @line-height-computed;
+  margin-bottom: (@line-height-computed / 2);
+}
+h4,h5,h6,
+.h4,.h5,.h6 {
+  margin-top: (@line-height-computed / 2);
+  margin-bottom: (@line-height-computed / 2);
+}
+
+h1, .h1 { 
+  font-size: @font-size-h1; 
+  color: @color-heading;
+  letter-spacing: -.05em;
+  .strong, strong {
+    .semi-bold();
+    color: @color-heading-strong;
+  } 
+}
+h2, .h2 { font-size: @font-size-h2; letter-spacing: -.08em;}
+h3, .h3 { font-size: @font-size-h3; letter-spacing: -.07em;}
+h4, .h4 { font-size: @font-size-h4; }
+h5, .h5 { font-size: @font-size-h5; }
+h6, .h6 { font-size: @font-size-h6; }
+
+h1 + h2 {
+  margin-top: -(@line-height-computed /1.3 );
+}
+
+aside, .aside {
+    h2, .h2 { 
+        color: @color-foreground;
+        font-size: @font-size-h3;
+    }
+}
+
+// Paragraphs
+// --------------------------------------------------
+p {
+  margin: 0 0 (@line-height-computed / 2);
+  text-align: justify;
+  .hyphens();
+}
+
+// Links
+// --------------------------------------------------
+a {
+  color: @color-link;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+
+// Lists
+// --------------------------------------------------
+
+// Unordered and Ordered lists
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: (@line-height-computed / 2);
+  ul,
+  ol {
+    margin-bottom: 0;
+  }
+}
+
+
+// Description Lists
+dl {
+  margin-top: 0; // Remove browser default
+  margin-bottom: @line-height-computed;
+}
+dt,
+dd {
+  line-height: @line-height-base;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 0; // Undo browser default
+}

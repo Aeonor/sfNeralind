@@ -1,0 +1,33 @@
+.talk {
+    aside & {
+        ul {
+            .list-unstyled();
+            a {
+                overflow: hidden;
+                display: block;
+                color: @color-foreground;
+                text-decoration: none;
+                padding: 10px;
+                margin-bottom: @margin-between-blocks;
+                &:hover { background: @black2-light; }
+                &.unread { background: @purple; 
+                    &:hover {background: @purple-light; } }
+                figure {
+                    float: left;
+                    margin-right: @margin-between-blocks;
+                }
+                h4 {
+                    font-size: 1.3em;
+                    .uppercase();
+                    color: @color-foreground;
+                    margin: 5px 0;
+                    letter-spacing: -.05em;
+                }
+                p {
+                    font-weight: 100;
+                }
+                
+            }
+        }
+    }
+}

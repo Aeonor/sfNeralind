@@ -1,0 +1,193 @@
+@header-height-md: 130px;
+@header-height-sm: 90px;
+@header-height-xs: 100px;
+
+body>header {
+  height: @header-height-md;
+  background: @color-header;
+
+  .logo {
+    display: block;
+    float: left; 
+    line-height: @header-height-md;
+    img { 
+      display: inline-block;
+      max-height: round(@header-height-md/2);
+      vertical-align: middle;
+    }
+  }
+
+  nav {
+    float: right;
+    line-height: @header-height-md;
+    ul {
+      .list-inline();
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1em;
+
+      li { padding: 0; }
+
+      .menu { display: none; }
+      .tags {
+        display: block;
+        .uppercase();
+        margin-bottom: 5px;
+        a { 
+          color: @color-foreground;
+          .semi-bold();
+          font-size: 1.4em;
+          letter-spacing: -.07em;
+          &:hover { text-decoration: none; }
+        } 
+      }
+      .icon {
+         @size: 18px;
+         margin-right: 1px;
+         a { text-indent: -9999px; .icons(@size); .hover-opacity(.6);}
+         &.contact { a { .spritepos(contact, @size); }}
+         &.fb      { a { .spritepos(fb, @size); }}
+         &.twitter { a { .spritepos(twitter, @size); }}
+         &.help    { a { .spritepos(help, @size); }}
+      }
+    }
+  } 
+
+  form {
+    float: right;
+    line-height: @header-height-md;
+    margin-right: 15px;
+    width: 20em;
+    div.search { display: inline-block; line-height: 1em; }
+    .q { 
+      .font-size(1.2em);  
+       padding: 12px 50px 12px 16px !important;
+       background: lighten(@black2, 5%);
+    }
+    .btn.search { 
+      height: 47px; 
+      width: 47px;
+      background-color: lighten(@color-btn-primary, 10%);
+      .sprite(search, 32px, 6px, 6px);
+    }
+  } 
+
+  @media @for-lte-sm {
+    height: @header-height-sm;
+    
+    .container { position: relative; }
+
+    .logo, nav, form {
+        line-height: @header-height-sm;
+    }
+
+    .logo {
+        img {            
+            max-height: round(@header-height-sm/1.7);
+        }
+    }
+
+    nav {
+        ul {
+             margin: 0;
+             @size: 36px;
+             .icon, .tags, .menu {
+                display: inline-block;
+                margin: 0 1px 0 0;
+                a { text-indent: -9999px; .icons(@size); .hover-opacity(.6); .font-size(1em); }
+                &.menu { a { .spritepos(menu, @size); }}
+                &.tags { a { .spritepos(tags, @size); }}
+                &.contact { a { .spritepos(contact, @size); }}
+                &.fb      { a { .spritepos(fb, @size); }}
+                &.twitter { a { .spritepos(twitter, @size); }}
+                &.help    { a { .spritepos(help, @size); }}
+             }
+             .menu { display: none; }
+        }
+    }
+
+    form {
+        width: 18em; 
+        margin-right: 10px;
+        .q { 
+            .font-size(1.1em);  
+            padding: 10px 45px 10px 10px !important;
+        }
+        .btn.search { 
+          height: 38px; 
+          width: 40px;
+          .sprite(search, 28px, 5px, 5px);
+        }
+    }
+  }
+
+
+  @media @for-xs {
+     height: @header-height-xs + 43;
+     overflow: hidden;
+
+    .logo, nav, form {
+        line-height: @header-height-xs;
+    }
+
+    .container { text-align: center; }
+
+    .logo {
+        float: none;
+        display: block;
+    }
+
+    .menus {
+      width: 400%;
+      margin: 0 -15px;
+      overflow: hidden;
+    }
+    
+    nav {
+        float: left;
+        text-align: left;
+        @size: 42px;
+        width: @size; 
+        height: @size;
+        display: inline-block;
+        overflow: hidden;
+        .transition();
+        ul {
+              width: 6 * @size + ( 6 * 7px);
+              vertical-align: top;
+             .icon, .tags, .menu {
+                display: inline-block;
+                margin: 0 3px 0 0;
+                a { text-indent: -9999px; .icons(@size); .hover-opacity(.6); .font-size(1em); }
+                &.menu { a { .spritepos(menu, @size); }}
+                &.tags { a { .spritepos(tags, @size); }}
+                &.contact { a { .spritepos(contact, @size); }}
+                &.fb      { a { .spritepos(fb, @size); }}
+                &.twitter { a { .spritepos(twitter, @size); }}
+                &.help    { a { .spritepos(help, @size); }}
+             }
+             .menu { display: inline-block; }
+        }
+
+        &.active {
+            width: 6 * @size + ( 6 * 7px);
+        }
+    }
+
+    form {
+        float: left;
+        line-height: 1em;
+        width: 24%;
+        .q { 
+            .font-size(1.3em);  
+            padding: 10px 45px 11px 10px !important;
+        }
+        .btn.search { 
+          height: 43px; 
+          width: 43px;
+          .sprite(search, 30px, 5px, 5px);
+        }
+    }
+  }
+
+}

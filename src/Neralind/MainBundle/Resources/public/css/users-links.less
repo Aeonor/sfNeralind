@@ -1,0 +1,45 @@
+.link-user, *[data-user] { 
+  &:before {
+    content: "\0040";    
+    .font-size(.9em); 
+    .opacity(.6);
+    .normal();
+  }
+}
+
+a { 
+  &.link-user, &[data-user] {
+      &:before {
+    .opacity(.5);
+      }
+    .transition();
+    &:hover {
+      &:before {
+      .opacity(1);
+      }
+    }
+  }
+}
+
+figure {
+    &.link-user, &[data-user] {
+        &:before {
+            content: none;
+        }
+        position: relative;        
+        .square(@user-avatar-size);
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+        figcaption {
+            position: absolute;
+            left: 0; bottom: 0;
+            width: 100%;
+            padding: 2px 5px;
+            text-align: right;
+            background: @color-black-opacity;
+            font-size: .9em;
+        }
+    }
+}

@@ -1,3 +1,7 @@
+neralind_main:
+    resource: "@NeralindMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
 neralind_resource:
     resource: "@NeralindResourceBundle/Resources/config/routing.yml"
     prefix:   /

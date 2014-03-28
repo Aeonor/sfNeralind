@@ -1,0 +1,30 @@
+.link-tag, *[data-tag] {
+  .lowercase();
+  &:before {
+    content: "\0023";    
+    .font-size(.7em); 
+     margin-right: .1em;
+    .opacity(.6);
+    .semi-bold();
+  }
+}
+
+a { 
+  &.link-tag, &[data-tag] {
+    .opacity(.5);
+    .transition();
+    &:hover {
+      &:before {
+      .opacity(1);
+      }
+    }
+  }
+}
+
+h1 {
+  &.link-tag, &[data-tag] {
+    color: #fff;
+    .lowercase();
+    .font-size(6.5em);
+  }
+}

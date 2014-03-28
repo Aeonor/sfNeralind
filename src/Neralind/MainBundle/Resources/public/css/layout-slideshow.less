@@ -1,0 +1,123 @@
+#slideshow {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 620px;   
+  overflow: hidden;
+
+  .container { 
+    height: 100%; 
+    position: relative; 
+  }
+
+  ul.carousel {
+    position: absolute;
+    left: 0; 
+    bottom: 0;
+    padding: 0; 
+    margin: 0;
+    .make-row();
+
+    list-style: none;
+    > li { 
+      float: none!important;
+      display: inline-block;
+      vertical-align: bottom;
+
+      .make-sm-column(4);
+      .make-md-column(4);
+
+      .make-lg-column-push(1.5);
+      .make-lg-column(3);
+
+      .font-size(1.15em);
+
+      &>a {
+        display: block;
+        background: @color-black-opacity;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: @color-foreground;
+        position: relative;
+        bottom: -35px;
+        min-height: 14.2em;
+        .hover-opacity(.8);
+
+        .btn {
+            visibility: hidden;
+            .font-size(.9em);
+            margin-top: 10px;
+        }
+
+        &:hover, &:active, &.active {
+          bottom: 0;
+          .btn {
+            visibility: visible;
+          }
+        }
+
+      }
+
+      h2, .h2 {
+        color: @color-foreground;
+        .font-size(1.85em);
+        margin: 0 0 .5em;
+      }
+    }
+  }
+
+
+
+  @media @for-lte-md { // ee-pc
+    height: 550px;
+  }
+
+  @media @for-lte-sm { // tablet
+    height: 430px;
+  }
+
+  @media @for-xs { // minitablet & mobile
+    height: 275px;
+
+    ul.carousel {
+      left: auto;
+      bottom: auto;
+      top: 50%; margin-top: -100px;
+      right: 0;
+      > li {
+        display: block;   
+        text-align: right;
+        .font-size(.85em);
+        margin: 5px -15px;
+        & > a {
+          min-height: 0;  
+          display: inline-block;
+          bottom: auto; right: -20px;
+          width: 70%; 
+          text-align: left;
+          h2 { margin: 0; }
+          p, .btn { display: none; }
+          &:hover, &:active, &.active {
+            right: 0;
+          }
+        } 
+      } 
+    }
+  }
+
+  &.small {
+    height: 450px; 
+
+    @media @for-lte-md { // ee-pc
+      height: 350px;
+    }
+
+    @media @for-lte-sm { // tablet
+      height: 280px;
+    }
+
+    @media @for-xs { // minitablet & mobile
+      height: 215px;
+    }
+  }
+  
+}

@@ -1,0 +1,22 @@
+nav.ariane {
+    margin: 2.4em 0 -2.4em;
+    ul { .list-inline(); }
+    a {
+        color: @black2-lighterer; 
+        font-weight: 400;
+        letter-spacing: -.08em;
+        .lowercase();
+        text-decoration: none;
+        &:after { padding-left: 6px; content: " /"; color: @black2-lighterer;  }
+        &:hover { color: @purple-lighter; }
+    }
+    ul > li {
+        &:last-child {
+            a {
+                &:after {
+                    content: none;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+article, .article {
+    .make-md-column(8);
+
+    .loading {
+        position: relative; top: -5px;
+        float: right;
+        .icon(next, 25px);
+        .hover-opacity();
+        &.previous {
+            .rotation(180deg);
+        }
+        & + * { clear: right; }
+    }
+}
+
+aside, .aside {
+    .make-md-column(4);
+    form.search {
+        margin-bottom: @margin-between-blocks * 2;
+    }
+}

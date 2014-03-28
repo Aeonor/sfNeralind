@@ -22,14 +22,17 @@ class NoRelationWordValidator extends ConstraintValidator {
             $inRelationShip = array();
 
             foreach ($words as $word) {
-                $word = $this->em->getRepository('NeralindTagBundle:Word')->findOneByName($word->getName());
-
-                if (isset($word) &&
-                        ( $word->getPrincipalTag() != null ||
-                        $word->getRedirectedTag() != null
-                        )
-                ) {
+                if ($word->getPrincipalTag() != null && $word->getRedirectedTag() != null) {
                     $inRelationShip[] = $word->getName();
+                } else {
+                    $word = $this->em->getRepository('NeralindTagBundle:Word')->findOneByName($word->getName());
+                    if (isset($word) &&
+                            ( $word->getPrincipalTag() != null ||
+                            $word->getRedirectedTag() != null
+                            )
+                    ) {
+                        $inRelationShip[] = $word->getName();
+                    }
                 }
             }
 

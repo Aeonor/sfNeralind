@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Neralind\TagBundle\NeralindTagBundle(),
             new Neralind\ResourceBundle\NeralindResourceBundle(),
+            new Neralind\MainBundle\NeralindMainBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

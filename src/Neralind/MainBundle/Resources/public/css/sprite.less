@@ -1,0 +1,99 @@
+// Sprites def
+@default-size: 40px;
+@initial-icon-size: 100px;
+
+@initial-width: 100px;
+@initial-height: 2140px;
+
+@initial-icon-horizontal-margin: 20px;
+@initial-icon-vertical-margin: 0;
+
+.initial-pos(@size: @default-size, @posX: 0, @posY: 0, @decalX: 0, @decalY: 0) {
+
+  // Position
+  @posXX: -1 * ( @posX * @initial-icon-size + (@posX) * @initial-icon-horizontal-margin );
+  @posYY: @posY * @initial-icon-size + (@posY) * @initial-icon-vertical-margin;
+
+  // Size
+  @new-posX: @size * @posXX / @initial-icon-size + @decalY;
+  @new-posY: @size * @posYY / @initial-icon-size + @decalX;
+
+  // Write
+  background-position: @new-posY @new-posX;
+}
+
+
+// Sprite mixins
+.sprites(@size, @img: @img-sprite) {
+  display: inline-block;
+  background-image: url(@img);
+  background-repeat: no-repeat;
+
+  // Size
+  @new-width: @size * @initial-width / @initial-icon-size;
+  @new-height: @size * @initial-height / @initial-icon-size;
+  background-size: @new-width @new-height;
+}
+
+.spritepos(tags, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 0, 0, @decalX, @decalY); }
+.spritepos(contact, @size: @default-size, @decalX: 0, @decalY: 0)   { .initial-pos(@size, 1, 0, @decalX, @decalY); }
+.spritepos(fb, @size: @default-size, @decalX: 0, @decalY: 0)        { .initial-pos(@size, 2, 0, @decalX, @decalY); }
+.spritepos(twitter, @size: @default-size, @decalX: 0, @decalY: 0)   { .initial-pos(@size, 3, 0, @decalX, @decalY); }
+.spritepos(help, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 4, 0, @decalX, @decalY); }
+.spritepos(search, @size: @default-size, @decalX: 0, @decalY: 0)    { .initial-pos(@size, 5, 0, @decalX, @decalY); }
+.spritepos(key, @size: @default-size, @decalX: 0, @decalY: 0)       { .initial-pos(@size, 6, 0, @decalX, @decalY); }
+.spritepos(account, @size: @default-size, @decalX: 0, @decalY: 0)   { .initial-pos(@size, 7, 0, @decalX, @decalY); }
+.spritepos(user, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 8, 0, @decalX, @decalY); }
+.spritepos(lock, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 9, 0, @decalX, @decalY); }
+.spritepos(contact2, @size: @default-size, @decalX: 0, @decalY: 0)  { .initial-pos(@size, 10, 0, @decalX, @decalY); }
+.spritepos(discussion, @size: @default-size, @decalX: 0, @decalY: 0){ .initial-pos(@size, 11, 0, @decalX, @decalY); }
+.spritepos(bell, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 12, 0, @decalX, @decalY); }
+.spritepos(sas, @size: @default-size, @decalX: 0, @decalY: 0)       { .initial-pos(@size, 13, 0, @decalX, @decalY); }
+.spritepos(newmessage, @size: @default-size, @decalX: 0, @decalY: 0){ .initial-pos(@size, 14, 0, @decalX, @decalY); }
+.spritepos(menu, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 15, 0, @decalX, @decalY); }
+.spritepos(gear, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 16, 0, @decalX, @decalY); }
+.spritepos(next, @size: @default-size, @decalX: 0, @decalY: 0)      { .initial-pos(@size, 17, 0, @decalX, @decalY); }
+
+
+.spritepos(admin-tags, @size: @default-size, @decalX: 0, @decalY: 0){ .initial-pos(@size, 0, 0, @decalX, @decalY); }
+.spritepos(delete, @size: @default-size, @decalX: 0, @decalY: 0)    { .initial-pos(@size, 1, 0, @decalX, @decalY); }
+
+.sprite(@name, @size: @default-size, @decalX: 0, @decalY: 0) {
+  .sprites(@size);
+  .spritepos(@name, @size, @decalX, @decalY);
+}
+
+
+.icons(@size: @default-size) {
+  width: @size;
+  height: @size;
+  .sprites(@size);
+}
+
+// Icon mixins
+.icon(@name, @size: @default-size) {
+  width: @size;
+  height: @size;
+  .sprite(@name, @size);
+}
+
+
+// ADMIN
+.spriteadmin(@name, @size: @default-size, @decalX: 0, @decalY: 0) {
+    .sprites(@size, @img-sprite-admin);
+    .spritepos(@name, @size, @decalX, @decalY);
+}
+
+
+.iconsadmin(@size: @default-size) {
+  width: @size;
+  height: @size;
+  .sprites(@size, @img-sprite-admin);
+}
+
+// Icon mixins
+.iconadmin(@name, @size: @default-size, @decalX: 0, @decalY: 0) {
+  width: @size;
+  height: @size;
+  .spriteadmin(@name, @size, @decalX, @decalY);
+}

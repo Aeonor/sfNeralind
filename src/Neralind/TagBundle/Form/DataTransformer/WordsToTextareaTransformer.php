@@ -31,15 +31,15 @@ class WordsToTextareaTransformer implements DataTransformerInterface {
         if (null === $words || empty($words)) {
             return "";
         }
-
+ 
         $texts = array();
-        if (is_array($words)) {
+        if( is_array($words) || $words instanceof \Traversable ) {
             foreach ($words AS $word) {
                 $texts[] = $word->getName();
             }
         }
 
-        return implode(', ', $texts);
+        return implode(',', $texts);
     }
 
     /**

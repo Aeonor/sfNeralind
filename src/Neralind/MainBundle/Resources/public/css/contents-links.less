@@ -1,0 +1,11 @@
+.link-content, *[data-content] { 
+  text-decoration: underline;
+}
+
+a { 
+  &.link-content, &[data-content] {
+    .opacity(.5);
+    .transition();
+   
+  }
+}

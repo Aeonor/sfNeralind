@@ -1,0 +1,37 @@
+.sas {
+    &.homepage {
+        h1 {
+            margin-bottom: @margin-between-blocks * 2;
+        }
+        .row, .row ul {
+            .list-unstyled();
+        }
+        .row {
+            h2 {
+                margin: 0 0 @margin-between-blocks;
+                color: @color-foreground;
+                font-size: 1.6em;
+                letter-spacing: 0;
+            }
+            > li {
+                .make-sm-column(4);
+                margin-bottom: @margin-between-blocks * 2;
+                @media @for-sm { height: 210px; }
+                @media @for-md { height: 270px; }
+                @media @for-lg { height: 335px; }
+                > div {
+                    height: 100%;
+                    padding: 25px;
+                    background: @purple;
+                }
+                ul {
+                   li { margin: 4px 0; }
+                   a {
+                        color: @color-foreground;
+                        font-weight: 300;
+                   }
+                }
+            }
+        }
+    }
+}
