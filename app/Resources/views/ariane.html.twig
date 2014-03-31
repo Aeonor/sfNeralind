@@ -1,0 +1,11 @@
+{% spaceless %}
+<nav class="ariane">
+  <ul>
+
+          {% for arg in args %} 
+            {% set keys = arg|keys %}
+             <li><a href="{{ path(keys[0]) }}">{{ arg[keys[0]] }}</a></li>
+          {% endfor %}
+   </ul>
+</nav>
+{% endspaceless %}

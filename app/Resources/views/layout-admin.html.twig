@@ -1,0 +1,15 @@
+{% extends '::layout.html.twig' %}
+
+{% block body -%}
+   <div id="menu-top" class="admin" data-fixed="top">
+    <div class="container">
+        <a href="#" class="logo">admin</a>
+        <ul>
+            <li><a href="{{ path('tag') }}" class="tags">Gestion des tags</a></li>
+        </ul>
+    </div>
+</div>
+   {% block body_admin %}
+   
+   {% endblock %}
+{% endblock body %}

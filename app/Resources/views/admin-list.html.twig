@@ -1,0 +1,21 @@
+{% if entity_title is not defined %}
+  {% set entity_title = 'name' %}
+{% endif %}
+
+{% spaceless %}
+<section class="article">
+  <ul class="admin-list">
+  {% for entity in entities %}
+      <li>
+        <a href="#" class="contents">
+          <h2 class="link-tag">{{ entity[entity_title] }}</h2>
+          <p><span class="link-tag">tarots</span>, <span class="link-tag">taromancie</span>, <span class="link-tag">cartomancie</span></p>
+        </a>
+        <a href="#" class="del"></a>
+      </li>
+  {% else %}
+      <p>Aucun élément</p>
+  {% endfor %}
+    </ul>
+  </section>
+{% endspaceless %}

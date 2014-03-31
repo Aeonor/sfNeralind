@@ -7,7 +7,9 @@
         <meta name="description" content="Neralind.com " />
         <title>Neralind.com{% if title is defined %} {{ title|striptags }}{% endif %}</title>
 
-        {% stylesheets '@NeralindMainBundle/Resources/public/css/styles.less' output='css/styles.css' %}
+        {% stylesheets 'bundles/neralindmain/font/fonts.css'
+                       'bundles/neralindmain/less/styles.less'
+          output='css/styles.css' filter='cssrewrite, ?yui_css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %} 
         {% block stylesheets %}{% endblock %}
