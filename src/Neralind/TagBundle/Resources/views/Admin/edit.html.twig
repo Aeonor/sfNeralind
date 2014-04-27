@@ -1,16 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout-admin.html.twig' %}
+{% set title = "Modifier le tag <strong class='link-tag'>"~entity.name~"</strong>" %}
 
-{% block body -%}
-    <h1>Tag edit</h1>
+{% block body_admin -%}
+     <div id="content">
+    {% include '::ariane.html.twig' with {
+      'args': [
+        {'admin_tag':  'admin'},
+        {'admin_tag':  "gestion des tags"},
+        {'admin_tag_edit':  title, "params": {'slug': entity.slug} }
+      ]
+    } %}    
+    <h1>{{ title|raw }}</h1>
 
-    {{ form(edit_form) }}
+    <div class="row">
+      {{ render(controller("NeralindTagBundle:Admin:list")) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_tag') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+      <section class="aside">
+        <h2>Modifier le tag <span class="link-tag">{{ entity.name }}</span></h2>
+        {{ form(edit_form, { 'attr': { 'class': 'classic'} }) }}
+      </section>
+    </div>
+  </div>
 {% endblock %}

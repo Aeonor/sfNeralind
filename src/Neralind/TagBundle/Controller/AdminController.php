@@ -24,12 +24,50 @@ class AdminController extends Controller {
    */
   public function listAction() {
     $em = $this->getDoctrine()->getManager();
-
     $entities = $em->getRepository('NeralindTagBundle:Tag')->findAll();
 
     return array(
         'entities' => $entities,
     );
+  }
+
+  /**
+   * Display search form.
+   * @Method("GET")
+   * @Template()
+   */
+  public function findAction() {
+    $form = $this->createSearchForm();
+    return array('search_form' => $form->createView());
+  }
+
+  private function createSearchForm() {
+    $defaultData = array('message' => 'Type your message here');
+    return $this->createFormBuilder($defaultData)
+                    ->setAction($this->generateUrl('admin_tag_search'))
+                    ->setMethod('POST')
+                    ->add('q', 'search')
+                    ->add('search', 'submit')
+                    ->getForm();
+  }
+
+  /**
+   * Query search form.
+   * @Route("/search", name="admin_tag_search")
+   * @Method("POST")
+   * @Template()
+   */
+  public function searchAction(Request $request) {
+    $defaultData = array('message' => 'Type your message here');
+    $form = $this->createSearchForm();
+    $form->handleRequest($request);
+
+    if ($form->isValid()) {
+      $data = $form->getData();
+      var_dump($data);
+      exit;
+    }
+    return array();
   }
 
   /**
@@ -95,47 +133,23 @@ class AdminController extends Controller {
   }
 
   /**
-   * Finds and displays a Tag entity.
-   *
-   * @Route("/{id}", name="admin_tag_show")
-   * @Method("GET")
-   * @Template()
-   */
-  public function showAction($id) {
-    $em = $this->getDoctrine()->getManager();
-
-    $entity = $em->getRepository('NeralindTagBundle:Tag')->find($id);
-
-    if (!$entity) {
-      throw $this->createNotFoundException('Unable to find Tag entity.');
-    }
-
-    $deleteForm = $this->createDeleteForm($id);
-
-    return array(
-        'entity' => $entity,
-        'delete_form' => $deleteForm->createView(),
-    );
-  }
-
-  /**
    * Displays a form to edit an existing Tag entity.
    *
-   * @Route("/{id}/edit", name="admin_tag_edit")
+   * @Route("/{slug}/edit", name="admin_tag_edit")
    * @Method("GET")
    * @Template()
    */
-  public function editAction($id) {
+  public function editAction($slug) {
     $em = $this->getDoctrine()->getManager();
 
-    $entity = $em->getRepository('NeralindTagBundle:Tag')->find($id);
+    $entity = $em->getRepository('NeralindTagBundle:Tag')->find($slug);
 
     if (!$entity) {
       throw $this->createNotFoundException('Unable to find Tag entity.');
     }
 
     $editForm = $this->createEditForm($entity);
-    $deleteForm = $this->createDeleteForm($id);
+    $deleteForm = $this->createDeleteForm($slug);
 
     return array(
         'entity' => $entity,

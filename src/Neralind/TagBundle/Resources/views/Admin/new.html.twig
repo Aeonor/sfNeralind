@@ -12,11 +12,10 @@
     <h1>{{ title|raw }}</h1>
 
     <div class="row">
-      <section class="article">
-
-      </section>
+      {{ render(controller("NeralindTagBundle:Admin:list")) }}
 
       <section class="aside">
+        {{ render(controller("NeralindTagBundle:Admin:find")) }}
         <h2>Créer un tag</h2>
         {{ form(form, { 'attr': { 'class': 'classic'} }) }}
       </section>
