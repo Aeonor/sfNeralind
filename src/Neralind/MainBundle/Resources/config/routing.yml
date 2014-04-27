@@ -1,3 +1,0 @@
-neralind_main_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: NeralindMainBundle:Default:index }

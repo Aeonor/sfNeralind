@@ -1,0 +1,57 @@
+
+// Mozaic tags
+.tags-mozaic-container-rec(@columns: 6, @rows: 3, @total-width, @margin: @tags-mozaic-margin) {
+  @margins: @margin * (@columns - 1);
+  @width-without-margins: @total-width - @margins;
+  @column-width: floor(@width-without-margins / @columns);
+
+  height: @rows * @column-width + ( @rows - 1 ) * @margin;
+}
+
+.tags-mozaic-container(@columns: 6, @rows: 3, @margin: @tags-mozaic-margin) {
+  .tags-mozaic-container-rec(@columns, @rows, @container-large-desktop - @grid-gutter-width, @margin);
+  @media @for-lte-md {
+    .tags-mozaic-container-rec(@columns, @rows, @container-desktop - @grid-gutter-width, @margin);
+  }
+  @media @for-lte-sm {
+    .tags-mozaic-container-rec(@columns, @rows, @container-tablet - @grid-gutter-width, @margin);
+  }
+  @media @for-xs {
+    .make-row();
+    height: auto;
+  }
+}
+
+.tags-mozaic-item-rec(@cols, @lines, @posY, @posX, @total-width, @margin: @tags-mozaic-margin, @columns: 6) {
+  // Six columns, five margins width/height of one
+  @margins: @margin * (@columns - 1);
+  @width-without-margins: @total-width - @margins;
+  @column-width: floor(@width-without-margins / @columns);
+
+  @item-width: @cols * @column-width + ( @cols - 1 ) * @margin;
+  @item-height: @lines * @column-width + ( @lines - 1 ) * @margin;
+
+  width: @item-width;
+  height: @item-height;
+
+
+  @posYY: @posY * @column-width + ( @posY) * @margin;
+  @posXX: @posX * @column-width + ( @posX  ) * @margin;
+
+  top: @posXX;
+  left: @posYY;
+}
+
+.tags-mozaic-item(@cols, @lines, @posY, @posX, @margin: @tags-mozaic-margin, @columns: 6) {
+  .tags-mozaic-item-rec(@cols, @lines, @posY, @posX, @container-large-desktop - @grid-gutter-width, @margin, @columns);
+
+  @media @for-lte-md {
+    .tags-mozaic-item-rec(@cols, @lines, @posY, @posX, @container-desktop - @grid-gutter-width, @margin, @columns);
+  }
+
+  @media @for-lte-sm {
+    .tags-mozaic-item-rec(@cols, @lines, @posY, @posX, @container-tablet - @grid-gutter-width, @margin, @columns);
+  }
+
+
+}

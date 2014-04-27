@@ -3,19 +3,23 @@
   &:before {
     content: "\0023";    
     .font-size(.7em); 
-     margin-right: .1em;
+    margin-right: .1em;
     .opacity(.6);
     .semi-bold();
   }
+
 }
 
 a { 
   &.link-tag, &[data-tag] {
-    .opacity(.5);
-    .transition();
+    text-decoration: none;
+    font-weight: 400;
+    &:before {
+      .opacity(.5);
+    }
     &:hover {
       &:before {
-      .opacity(1);
+        .opacity(1);
       }
     }
   }

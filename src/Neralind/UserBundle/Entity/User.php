@@ -1,5 +1,4 @@
 <?php
-// src/Neralind/UserBundle/Entity/User.php
 
 namespace Neralind\UserBundle\Entity;
 
@@ -10,18 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
-{
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+class User extends BaseUser {
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="integer")
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected $id;
+
+  public function __construct() {
+    parent::__construct();
+  }
+
 }

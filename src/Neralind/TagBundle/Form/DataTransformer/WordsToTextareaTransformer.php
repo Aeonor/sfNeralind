@@ -51,7 +51,7 @@ class WordsToTextareaTransformer implements DataTransformerInterface {
      */
     public function reverseTransform($textarea) {
         if (!$textarea) {
-            return null;
+            return new \Doctrine\Common\Collections\ArrayCollection();
         }
         
 

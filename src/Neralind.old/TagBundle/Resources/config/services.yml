@@ -1,0 +1,27 @@
+parameters:
+#    neralind_tag.example.class: Neralind\TagBundle\Example
+
+services:
+   validator.NoRelationWordValidator:
+        class: Neralind\TagBundle\Validator\Constraints\NoRelationWordValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: NoRelationWordValidator }
+
+   neralind_tag.type.word_selector:
+        class: Neralind\TagBundle\Form\Type\WordSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: word_selector }
+
+   neralind_tag.type.words_selector:
+        class: Neralind\TagBundle\Form\Type\WordsSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: words_selector }
+
+   neralind_tag.type.tags_selector:
+        class: Neralind\TagBundle\Form\Type\TagsSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: tags_selector }

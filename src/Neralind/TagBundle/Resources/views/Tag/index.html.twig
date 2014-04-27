@@ -1,63 +1,45 @@
-{% extends '::layout-admin.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% set title %}Gestion des <strong>tags</strong>{% endset %}
-
-
-{% block body_admin -%}
-<div id="content">
-
-    {% include '::ariane.html.twig' with {'args': [
-      {'tag': 'admin'},
-      {'tag': 'gestion des tags'}
-    ]} %}
-
-  <h1>{{ title }}</h1>
-
-  <div class="row">
-    {% include '::admin-list.html.twig' with { 
-      'entities': entities,
-      'entity_title': 'name'
-    } %}
-    </div>
+{% block body -%}
+    <h1>Tag list</h1>
 
     <table class="records_list">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Weight</th>
-          <th>Initialweight</th>
-          <th>Caption</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Weight</th>
+                <th>Initialweight</th>
+                <th>Caption</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for entity in entities %}
-          <tr>
-            <td><a href="{{ path('tag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.weight }}</td>
-            <td>{{ entity.initialWeight }}</td>
-            <td>{{ entity.caption }}</td>
-            <td>
-              <ul>
-                <li>
-                  <a href="{{ path('tag_show', { 'id': entity.id }) }}">show</a>
-                </li>
-                <li>
-                  <a href="{{ path('tag_edit', { 'id': entity.id }) }}">edit</a>
-                </li>
-              </ul>
-            </td>
-          </tr>
+            <tr>
+                <td><a href="{{ path('admin_tag_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.weight }}</td>
+                <td>{{ entity.initialWeight }}</td>
+                <td>{{ entity.caption }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_tag_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_tag_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
         {% endfor %}
         </tbody>
-      </table>
+    </table>
 
-      <ul>
+        <ul>
         <li>
-          <a href="{{ path('tag_new') }}">
-            Create a new entry
-          </a>
+            <a href="{{ path('admin_tag_new') }}">
+                Create a new entry
+            </a>
         </li>
-      </ul>
-    </div>
+    </ul>
     {% endblock %}

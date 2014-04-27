@@ -17,11 +17,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Neralind\UserBundle\NeralindUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Neralind\TagBundle\NeralindTagBundle(),
-            new Neralind\ResourceBundle\NeralindResourceBundle(),
+            new Neralind\UserBundle\NeralindUserBundle(),
             new Neralind\MainBundle\NeralindMainBundle(),
+            new Neralind\TagBundle\NeralindTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

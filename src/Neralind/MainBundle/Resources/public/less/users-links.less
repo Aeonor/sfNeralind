@@ -1,17 +1,17 @@
 .link-user, *[data-user] { 
+  .lowercase();
   &:before {
-    content: "\0040";    
-    .font-size(.9em); 
+    content: "\0040";   
+    .font-size(.7em); 
+     margin-right: .05em;
     .opacity(.6);
-    .normal();
+    .semi-bold();
   }
 }
 
 a { 
   &.link-user, &[data-user] {
-      &:before {
     .opacity(.5);
-      }
     .transition();
     &:hover {
       &:before {

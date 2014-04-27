@@ -49,9 +49,9 @@ class TagsToTextareaTransformer implements DataTransformerInterface {
      * @return Words|null
      * @throws TransformationFailedException if object (words) is not found.
      */
-    public function reverseTransform($textarea) {
+    public function reverseTransform($textarea) { 
         if (!$textarea) {
-            return null;
+            return new \Doctrine\Common\Collections\ArrayCollection();
         }
 
         // EXPLODE

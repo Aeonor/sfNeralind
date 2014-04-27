@@ -1,0 +1,44 @@
+.list-unstyled() {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+// Inline turns list items into inline-block
+.list-inline(@padding: 5px) {
+  > li {
+    display: inline-block;
+    padding-left: @padding;
+    padding-right: @padding;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+}
+
+.list-comas() {
+  .list-unstyled();
+  >li {
+    display: inline;
+    &:after {
+      content: ", ";
+    }
+    &:last-child {
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
+
+.list-styled() {
+  margin-top: 0;
+  margin-bottom: (@line-height-computed / 2);
+  list-style: disc outside;
+  ul,
+  ol {
+    margin-bottom: 0;
+    list-style: disc outside;
+  }
+}

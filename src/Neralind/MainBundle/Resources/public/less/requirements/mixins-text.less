@@ -1,0 +1,58 @@
+.font-title() {
+  font-family: 'Quicksand', Arial, sans-serif;
+  letter-spacing: -.06em;
+}
+
+.font-work() {
+  font-family: 'Quicksand', Arial, sans-serif;
+  letter-spacing: -.05em;
+}
+
+.font-logo() {
+  font-family: Arial, sans-serif;
+  font-size: 2.3em;  
+  font-weight: 600;
+  color: @color-foreground;
+  text-decoration: none;
+  letter-spacing: -.03em;  
+}
+
+.condensed(@spacing: @letter-spacing-condensed) {
+  letter-spacing: @spacing;
+}
+
+.font-size(@size) {
+  font-size: @size;
+}
+
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hyphens(@mode: auto) {
+  word-wrap: break-word;
+  -webkit-hyphens: @mode;
+  -moz-hyphens: @mode;
+  -ms-hyphens: @mode; // IE10+
+  -o-hyphens: @mode;
+  hyphens: @mode;
+}
+
+.uppercase() {
+  text-transform: uppercase;
+}
+
+.lowercase() {
+  text-transform: lowercase;
+}
+
+.font-smoothing() {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  //-webkit-opacity: 0.9999999;
+}
+
+.textshadow() {
+  text-shadow: 1px 1px 1px #000;
+}
