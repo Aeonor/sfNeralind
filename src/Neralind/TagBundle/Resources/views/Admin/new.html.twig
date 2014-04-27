@@ -1,15 +1,26 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout-admin.html.twig' %}
+{% set title = 'Gestion des <strong>tags</strong>' %}
+  
+{% block body_admin -%}
+  <div id="content">
+    {% include '::ariane.html.twig' with {
+      'args': [
+        {'admin_tag':  'admin'},
+        {'admin_tag':  title}
+      ]
+    } %}    
+    <h1>{{ title|raw }}</h1>
 
-{% block body -%}
-    <h1>Tag creation</h1>
+    <div class="row">
+      <section class="article">
 
-    {{ form(form) }}
+      </section>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_tag') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+      <section class="aside">
+        <h2>Créer un tag</h2>
+        {{ form(form, { 'attr': { 'class': 'classic'} }) }}
+      </section>
+    </div>
+  </div>
+
 {% endblock %}
