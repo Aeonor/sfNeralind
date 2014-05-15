@@ -1,6 +1,0 @@
-tag:
-  form:
-    principalWord: "Nom"
-    caption: "Description"
-    initialWeight: "Poids initial"
-    linkedTags: "Tags liés"

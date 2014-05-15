@@ -1,25 +1,3 @@
-{% extends '::layout-admin.html.twig' %}
-{% set title = 'Gestion des <strong>tags</strong>' %}
-  
-{% block body_admin -%}
-  <div id="content">
-    {% include '::ariane.html.twig' with {
-      'args': [
-        {'admin_tag':  'admin'},
-        {'admin_tag':  title}
-      ]
-    } %}    
-    <h1>{{ title|raw }}</h1>
+<h2>Créer un tag</h2>
+{{ form(form, { 'attr': { 'class': 'classic'} }) }}
 
-    <div class="row">
-      {{ render(controller("NeralindTagBundle:Admin:list")) }}
-
-      <section class="aside">
-        {{ render(controller("NeralindTagBundle:Admin:find")) }}
-        <h2>Créer un tag</h2>
-        {{ form(form, { 'attr': { 'class': 'classic'} }) }}
-      </section>
-    </div>
-  </div>
-
-{% endblock %}

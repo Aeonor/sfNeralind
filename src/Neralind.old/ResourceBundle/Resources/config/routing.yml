@@ -1,3 +1,0 @@
-neralind_resource_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: NeralindResourceBundle:Default:index }

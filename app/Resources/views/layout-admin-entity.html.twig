@@ -1,0 +1,16 @@
+{% extends '::layout-admin.html.twig' %}
+
+{% block body_admin -%}
+  <div id="content">
+    {% block ariane %}{% endblock %}
+    <h1>{{ title|raw }}</h1>
+
+    <div class="row">
+      {% block list %}{% endblock %}
+      <section class="aside">
+        {% block search %}{% endblock %}
+        {% block form %}{% endblock %}
+      </section>
+    </div>
+  </div>
+{% endblock %}

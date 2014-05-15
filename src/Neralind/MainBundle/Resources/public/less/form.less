@@ -34,6 +34,7 @@ input[type=submit], input[type=button], button, .btn {
 
   &:hover, &:focus {
     background: @color-btn-primary-hover;
+    outline: none;
   }
 
   &:active, &.selected {
@@ -42,7 +43,7 @@ input[type=submit], input[type=button], button, .btn {
   }
 
 
-  &.search, &.browse {
+  form.search &, &.search, &.browse {
     padding: 0;
     width: 38px;
     height: 38px;
@@ -53,7 +54,7 @@ input[type=submit], input[type=button], button, .btn {
     font-size: 1.7em;
   }
 
-  &.search {
+  form.search &, &.search {
     text-indent: -9999px;
     .sprite(search, 28px, 3px, 4px);
   }
@@ -63,13 +64,18 @@ label {
     cursor: pointer;
 }
 
-form.search, form div.search, form.picture, form div.picture {
+form.search, .form_search, form.picture {
     position: relative;
-    .q {
+    label {
+      display: none;      
+    }
+    
+    input[type=search], .q {
         width: 100%;
         padding-right: 45px;
     }
-    .search, .browse {
+    
+    *[type=submit], input.search, button.search, .browse {
             position: absolute;
             right: 0;
             top: 0;

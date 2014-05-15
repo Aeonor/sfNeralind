@@ -18,7 +18,43 @@ use Neralind\TagBundle\Form\TagType;
 class AdminController extends Controller {
 
   /**
-   * Lists all Tag entities.
+   * Display default page
+   * @Method("GET")
+   * @Route("/", name="admin_tag")
+   * @Template()
+   */
+  public function indexAction() {
+    return array();
+  }
+
+  /**
+   * Displays a form to edit an existing Tag entity.
+   *
+   * @Route("/{slug}", name="admin_tag_edit")
+   * @Method("GET")
+   * @Template()
+   */
+  public function editAction($slug) {
+    $em = $this->getDoctrine()->getManager();
+
+    $entity = $em->getRepository('NeralindTagBundle:Tag')->find($slug);
+
+    if (!$entity) {
+      throw $this->createNotFoundException('Unable to find Tag entity.');
+    }
+
+    $editForm = $this->createEditForm($entity);
+    $deleteForm = $this->createDeleteForm($slug);
+
+    return array(
+        'entity' => $entity,
+        'edit_form' => $editForm->createView(),
+        'delete_form' => $deleteForm->createView(),
+    );
+  }
+
+  /**
+   * [PARTIAL] Lists all Tag entities.
    * @Method("GET")
    * @Template()
    */
@@ -32,23 +68,13 @@ class AdminController extends Controller {
   }
 
   /**
-   * Display search form.
+   * [PARTIAL] Display search form.
    * @Method("GET")
    * @Template()
    */
   public function findAction() {
     $form = $this->createSearchForm();
     return array('search_form' => $form->createView());
-  }
-
-  private function createSearchForm() {
-    $defaultData = array('message' => 'Type your message here');
-    return $this->createFormBuilder($defaultData)
-                    ->setAction($this->generateUrl('admin_tag_search'))
-                    ->setMethod('POST')
-                    ->add('q', 'search')
-                    ->add('search', 'submit')
-                    ->getForm();
   }
 
   /**
@@ -62,20 +88,50 @@ class AdminController extends Controller {
     $form = $this->createSearchForm();
     $form->handleRequest($request);
 
+
     if ($form->isValid()) {
       $data = $form->getData();
-      var_dump($data);
-      exit;
+      $query = $data['q'];
+      
+      if ( empty($query) ) {
+        $this->redirect($this->generateUrl('admin_tag'));
+      }
+      
+      $em = $this->getDoctrine()->getManager();
+      $results = $em->getRepository('NeralindTagBundle:Tag')->search($query);
+      
+      return array(
+          'form' => $form->createView(),
+          'query' => $query,
+          'entities' => $results
+      );
     }
-    return array();
+
+    return array(
+        'form' => $form->createView()
+    );
+  }
+
+  /**
+   * Create find form
+   * @return type
+   */
+  private function createSearchForm() {
+    $defaultData = array('message' => 'Type your message here');
+    return $this->createFormBuilder($defaultData)
+                    ->setAction($this->generateUrl('admin_tag_search'))
+                    ->setMethod('POST')
+                    ->add('q', 'search', ['attr' => ['placeholder' => 'Rechercher un tag']])
+                    ->add('search', 'submit')
+                    ->getForm();
   }
 
   /**
    * Creates a new Tag entity.
    *
-   * @Route("/", name="admin_tag_create")
+   * @Route("/new", name="admin_tag_create")
    * @Method("POST")
-   * @Template("NeralindTagBundle:Admin:new.html.twig")
+   * @Template("NeralindTagBundle:Admin:layout.html.twig")
    */
   public function createAction(Request $request) {
     $entity = new Tag();
@@ -115,9 +171,8 @@ class AdminController extends Controller {
   }
 
   /**
-   * Displays a form to create a new Tag entity.
+   * [PARTIAL] Displays a form to create a new Tag entity.
    *
-   * @Route("/", name="admin_tag")
    * @Route("/new", name="admin_tag_new")
    * @Method("GET")
    * @Template()
@@ -129,32 +184,6 @@ class AdminController extends Controller {
     return array(
         'entity' => $entity,
         'form' => $form->createView(),
-    );
-  }
-
-  /**
-   * Displays a form to edit an existing Tag entity.
-   *
-   * @Route("/{slug}/edit", name="admin_tag_edit")
-   * @Method("GET")
-   * @Template()
-   */
-  public function editAction($slug) {
-    $em = $this->getDoctrine()->getManager();
-
-    $entity = $em->getRepository('NeralindTagBundle:Tag')->find($slug);
-
-    if (!$entity) {
-      throw $this->createNotFoundException('Unable to find Tag entity.');
-    }
-
-    $editForm = $this->createEditForm($entity);
-    $deleteForm = $this->createDeleteForm($slug);
-
-    return array(
-        'entity' => $entity,
-        'edit_form' => $editForm->createView(),
-        'delete_form' => $deleteForm->createView(),
     );
   }
 

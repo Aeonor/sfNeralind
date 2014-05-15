@@ -2,6 +2,7 @@
 
 namespace Neralind\TagBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -31,11 +32,24 @@ class TagRepository extends EntityRepository {
    * @return NeralindTagbundle:Tag
    */
   public function findOneBySlug($slug) {
-     $query = $this->getEntityManager()
-             ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug = :slug')
-             ->setParameter('slug', $slug);
- 
+    $query = $this->getEntityManager()
+            ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug = :slug')
+            ->setParameter('slug', $slug);
+
     return $query->getSingleResult();
+  }
+
+  public function search($q) {
+    try {
+      $result = $this->find($q);
+      return new ArrayCollection(array($result));
+    } catch (\Doctrine\ORM\NoResultException $e) { 
+      $query = $this->getEntityManager()
+              ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug LIKE :slug')
+              ->setParameter('slug', "%$q%");
+
+      return $query->getResult();
+    }
   }
 
 }

@@ -1,0 +1,21 @@
+{% extends '::layout-admin-entity.html.twig' %}
+{% set title = "Recherche de tag pour <strong>" ~ query ~ "</strong>" %}
+{% block ariane %}{% include '::ariane.html.twig' with {
+      'args': [
+        {'admin_tag':  'admin'},
+        {'admin_tag':  "gestion des tags"},
+        {'admin_tag':  "recherche"}
+      ]
+} %}{% endblock %}  
+{% block list %}{% include "NeralindTagBundle:Admin:list.html.twig" with { 'entities': entities} %}{% endblock %}
+{% block search %}{{ form(form) }}{% endblock %}
+{% block form %}{{ render(controller("NeralindTagBundle:Admin:new")) }}{% endblock %}
+  
+    {# include '::ariane.html.twig' with {
+      'args': [
+        {'admin_tag':  'admin'},
+        {'admin_tag':  "gestion des tags"},
+        {'admin_tag_edit':  title, "params": {'slug': entity.slug} }
+      ]
+    } #}    
+

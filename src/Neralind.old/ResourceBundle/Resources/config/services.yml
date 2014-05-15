@@ -1,7 +1,0 @@
-parameters:
-#    neralind_resource.example.class: Neralind\ResourceBundle\Example
-
-services:
-#    neralind_resource.example:
-#        class: %neralind_resource.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
