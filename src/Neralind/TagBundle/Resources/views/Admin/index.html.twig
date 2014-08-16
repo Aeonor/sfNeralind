@@ -1,13 +1,46 @@
-{% extends '::layout-admin-entity.html.twig' %}
+{% extends '::layout-admin.html.twig' %}
 
 {% set title = "Gestion des <strong>tags</strong>" %}
-{% block ariane %}
-  {% include '::ariane.html.twig' with {
-      'args': [
-        {'admin_tag':  'admin'},
-        {'admin_tag':  "gestion des tags"}
-      ]
-} %}{% endblock %}
-{% block list %}{{ render(controller("NeralindTagBundle:Admin:list")) }}{% endblock %}
-{% block search %}{{ render(controller("NeralindTagBundle:Admin:find")) }}{% endblock %}
-{% block form %}{{ render(controller("NeralindTagBundle:Admin:new")) }}{% endblock %}
+
+{% block body %}
+{{ parent() }}
+<div class="r-container">
+	<div class="r-row">
+		<div class="r-sm-8">
+			<nav class="ariane">
+				<ul class="ariane-list">
+					<li class="ariane-item"><a href="{{ path('admin') }}" class="ariane-link">admin</a></li>
+					<li class="ariane-item"><a href="{{ path('admin_tag') }}" class="ariane-link">gestion des tags</a></li>
+				</ul>
+			</nav>
+
+			<h1>{{ title|raw }}</h1>
+			<div class="admin">
+				<ul class="admin-list">
+					{% for entity in entities %}
+					<li class="admin-item">
+						<a href="#" class="admin-link">
+							<div class="tag-prefix admin-title">{{ entity.name }}</div>
+							<ul class="comas-listing">
+								<?php foreach($tag['synonyms'] AS $syn): ?>
+								<li class="tag-prefix"><?php echo $syn; ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</a>
+					<ul class="admin-actions">
+						<li class="admin-actions-item"><a href="#" class="icon-delete icon-big">Supprimer</a></li>
+					</ul>
+				</li>
+				{% else %}
+				<li>Aucun enregistrement</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+<div class="r-sm-4">
+	{% render(controller('NeralindTagBundle:Admin:new')) %}
+</div>
+</div>
+</div>
+
+{% endblock %}

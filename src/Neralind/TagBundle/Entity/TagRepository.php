@@ -4,6 +4,7 @@ namespace Neralind\TagBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * TagRepository
@@ -12,6 +13,27 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class TagRepository extends EntityRepository {
+
+  /*===============================
+  =            PRIVATE            =
+  ===============================*/
+  
+  private function createQuery() {
+    return $this->_em->createQueryBuilder()
+    ->select('tag')
+    ->from('NeralindTagBundle:Tag', 'tag')
+    ->join('tag.principalWord', 'word');
+  }
+  
+  private function getPaginator($q, $page = 1, $nbByPage = 10) {
+    return new Paginator(
+      $q->setFirstResult(($page - 1) * $nbByPage)
+      ->setMaxResults($nbByPage));
+  }
+
+  /*==============================
+  =            PUBLIC            =
+  ==============================*/
 
   /**
    * Get a tag by its ID or its principal word slug
@@ -33,8 +55,8 @@ class TagRepository extends EntityRepository {
    */
   public function findOneBySlug($slug) {
     $query = $this->getEntityManager()
-            ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug = :slug')
-            ->setParameter('slug', $slug);
+    ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug = :slug')
+    ->setParameter('slug', $slug);
 
     return $query->getSingleResult();
   }
@@ -45,11 +67,16 @@ class TagRepository extends EntityRepository {
       return new ArrayCollection(array($result));
     } catch (\Doctrine\ORM\NoResultException $e) { 
       $query = $this->getEntityManager()
-              ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug LIKE :slug')
-              ->setParameter('slug', "%$q%");
+      ->createQuery('SELECT tag FROM NeralindTagBundle:Tag tag JOIN tag.principalWord word WHERE word.slug LIKE :slug')
+      ->setParameter('slug', "%$q%");
 
       return $query->getResult();
     }
+  }
+
+
+  public function findAllPaginator($page = 1, $nbByPage = 10) {
+    return $this->getPaginator($this->createQuery(), $page, $nbByPage);
   }
 
 }

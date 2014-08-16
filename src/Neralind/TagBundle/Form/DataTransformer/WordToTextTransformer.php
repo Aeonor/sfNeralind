@@ -56,11 +56,7 @@ class WordToTextTransformer implements DataTransformerInterface
 
         if (null === $word) {
             $word = new Word();
-            $word->setName($text);
-         /*   throw new TransformationFailedException(sprintf(
-                'Le problème avec le terme "%s" ne peut pas être trouvé!',
-                $text
-            )); */
+            $word->setName($text);        
         }
 
         return $word;

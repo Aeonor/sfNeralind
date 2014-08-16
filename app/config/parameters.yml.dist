@@ -19,3 +19,5 @@ parameters:
 
     #node_path: /usr/local/bin/node
     #less_path: /usr/local/lib/node_modules
+
+    cdn: http://cdn.neralind.com

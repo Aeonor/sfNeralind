@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Neralind\UserBundle\NeralindUserBundle(),
             new Neralind\MainBundle\NeralindMainBundle(),
             new Neralind\TagBundle\NeralindTagBundle(),
+            new Neralind\TicketBundle\NeralindTicketBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -52,6 +52,8 @@ class Tag {
    */
   private $caption;
 
+
+
 //  /**
 //   * @ORM\ManyToOne(targetEntity="Neralind\ResourceBundle\Entity\ResourceImage")
 //   * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
@@ -59,9 +61,7 @@ class Tag {
 //  private $picture;
 
   /**
-   * @ORM\OneToOne(targetEntity="Word", inversedBy="principalTag", fetch="EAGER", cascade={"persist", "remove"})
-   * @ORM\JoinColumn(name="word_id", referencedColumnName="id", nullable=true)
-   * @NeralindTagAsserts\NoRelationWord()
+   * @ORM\OneToOne(targetEntity="Word", mappedBy="principalTag", fetch="EAGER", cascade={"persist"})
    */
   private $principalWord;
 
@@ -78,7 +78,7 @@ class Tag {
 
   /**
    * @ORM\ManyToMany(targetEntity="Tag", inversedBy="linkedTags")
-   * @ORM\JoinTable(name="taglinked",
+   * @ORM\JoinTable(name="tag_linked",
    *      joinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")},
    *      inverseJoinColumns={@ORM\JoinColumn(name="linkedtag_id", referencedColumnName="id")}
    *      )
@@ -174,8 +174,8 @@ class Tag {
    * @return Tag
    */
   public function setPrincipalWord(\Neralind\TagBundle\Entity\Word $principalWord = null) {
+    $principalWord->setPrincipalTag($this);
     $this->principalWord = $principalWord;
-
     return $this;
   }
 
@@ -269,10 +269,12 @@ class Tag {
 
   // Principal Word Shorcuts 
   public function getName() {
+    if ( !$this->getPrincipalWord() ) return;
     return $this->getPrincipalWord()->getName();
   }
 
   public function getSlug() {
+    if ( !$this->getPrincipalWord() ) return;
     return $this->getPrincipalWord()->getSlug();
   }
 

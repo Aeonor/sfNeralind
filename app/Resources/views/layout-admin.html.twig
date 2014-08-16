@@ -1,22 +1,28 @@
-{% extends '::layout.html.twig' %}
+{% extends "::layout.html.twig" %}
 
-{% block stylesheets %}
- {% stylesheets 'bundles/neralindmain/less/styles-admin.less'
-          output='css/styles.css' filter='cssrewrite, ?yui_css' %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %} 
+{% block javascript %}
+<script src="{{ asset('javascripts/init.admin.js', 'cdn') }}"></script>
 {% endblock %}
 
-{% block body -%}
-   <div id="menu-top" class="admin" data-fixed="top">
-    <div class="container">
-        <a href="#" class="logo">admin</a>
-        <ul>
-            <li><a href="{{ path('admin_tag') }}" class="tags">Gestion des tags</a></li>
-        </ul>
-    </div>
-</div>
-   {% block body_admin %}
-   
-   {% endblock %}
-{% endblock body %}
+{% block body %}
+<nav class="spacemenu">
+	<div class="r-container">
+		<a href="{{ path('admin') }}" class="spacemenu-logo"><i class="icon-config spacemenu-logo-icon"></i> admin</a>
+		<ul class="spacemenu-list">
+
+			{% if is_granted('ROLE_ADMIN_TAG') %}
+			<li class="spacemenu-item">
+				<a href="{{ path('admin_tag') }}" class="spacemenu-link icon-tag icon-big">Tags</a>
+			</li>
+			{% endif %}
+
+			{% if is_granted('ROLE_ADMIN_TICKET') %}
+			<li class="spacemenu-item">
+				<a href="{{ path('admin_ticket') }}" class="spacemenu-link icon-ticket icon-big">Tickets</a>
+			</li>
+			{% endif %}
+
+		</ul>
+	</div>
+</nav>
+{% endblock %}

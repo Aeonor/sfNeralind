@@ -10,7 +10,7 @@ use Neralind\TagBundle\Validator\Constraints as NeralindTagAsserts;
 /**
  * Word
  *
- * @ORM\Table(name="tagword",indexes={@ORM\index(name="word_idx", columns={"slug"})})
+ * @ORM\Table(name="tag_word",indexes={@ORM\index(name="word_idx", columns={"slug"})})
  * @ORM\Entity
  */
 class Word {
@@ -48,13 +48,15 @@ class Word {
   private $slug;
 
   /**
-   * @ORM\OneToOne(targetEntity="Tag", mappedBy="principalWord", fetch="EAGER")
+   * @ORM\OneToOne(targetEntity="Tag", inversedBy="principalWord", fetch="EAGER", cascade={"persist", "remove"})
+   * @ORM\JoinColumn(name="tag_principal_id", referencedColumnName="id", nullable=true)
+   * @NeralindTagAsserts\NoRelationWord()
    */
   private $principalTag;
 
   /**
    * @ORM\ManyToOne(targetEntity="Tag", inversedBy="redirectionWords", fetch="EAGER")
-   * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", nullable=true)
+   * @ORM\JoinColumn(name="tag_redirected_id", referencedColumnName="id", nullable=true)
    */
   private $redirectedTag;
 

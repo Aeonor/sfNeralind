@@ -1,10 +1,15 @@
-neralind_tag:
-    resource: "@NeralindTagBundle/Controller/"
+neralind_ticket:
+    resource: "@NeralindTicketBundle/Controller/"
     type:     annotation
     prefix:   /
 
 neralind_main:
     resource: "@NeralindMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+neralind_tag:
+    resource: "@NeralindTagBundle/Controller/"
     type:     annotation
     prefix:   /
 

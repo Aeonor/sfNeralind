@@ -16,10 +16,9 @@ class TagType extends AbstractType {
     $builder
             ->add('principalWord', 'word_selector')
             ->add('caption')
-    //        ->add('picture')
             ->add('initialWeight')
             ->add('redirectionWords', 'words_selector', array('by_reference' => false, 'required' => false))
-            ->add('linkedTags', 'tags_selector', array('required' => false))
+            ->add('linkedTags', 'tags_selector', array('by_reference' => false, 'required' => false))
     ;
   }
 
