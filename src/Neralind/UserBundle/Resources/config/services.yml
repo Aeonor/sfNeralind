@@ -1,0 +1,9 @@
+parameters:
+#    neralind_tag.example.class: Neralind\TagBundle\Example
+
+services:
+   neralind_user.type.user_selector:
+        class: Neralind\UserBundle\Form\Type\UserSelectorType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: user_selector }

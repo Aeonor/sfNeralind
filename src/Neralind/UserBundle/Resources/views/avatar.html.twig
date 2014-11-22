@@ -1,0 +1,11 @@
+ <a href="#">
+ 	<figure class="forum-avatar">
+ 		{% if user.avatar is defined %}
+ 		<img src="{{ user.avatar }}" alt="Avatar de {{ user.username }}" class="forum-avatar-picture">
+ 		{% else %}
+ 		{% set avatar = user.username|default('default') %}
+ 		<img src="{{ asset("/upload/#{avatar}.png") }}" alt="Avatar commun" class="forum-avatar-picture" />
+ 		{% endif %}
+ 		<figcaption class="forum-avatar-caption">{{ user.username|default('Invité') }}</figcaption>
+ 	</figure>
+ </a>

@@ -1,0 +1,107 @@
+{% extends "::layout-admin.html.twig" %}
+
+{% set title = "Gestion des <strong>tickets</strong>" %}
+{% block body -%}
+{{ parent() }}
+<div class="r-container">
+	<div class="r-row">
+		<div class="r-sm-8">
+			<nav class="ariane">
+				<ul class="ariane-list">
+					<li class="ariane-item"><a href="{{ path('admin') }}" class="ariane-link">admin</a></li>
+					<li class="ariane-item"><a href="{{ path('admin_ticket') }}" class="ariane-link">gestion des tickets</a></li>
+					<li class="ariane-item"><a href="#lots" class="ariane-link">lots</a></li>
+				</ul>
+			</nav>
+			<h1>{{title|raw}}</h1>
+			<h2>Lots de tickets</h2>
+
+			<ul class="admin">
+				{% for lot in lots %}
+				<li class="admin-item">
+					<a href="{{ path('admin_ticket_lot_edit', { 'id': lot.id }) }}" class="admin-link js-admin-edit" data-target="#js-admin-form-edit-lot">
+						<span class="admin-id">{{ lot.id }}</span>
+						{{ lot.name }}
+					</a>
+					<ul class="admin-actions">
+						<li class="admin-actions-item">
+							{% render(controller("NeralindTicketBundle:AdminLot:erase", {'id': lot.id})) %}
+						</li>
+					</ul>
+				</li>
+				{% else %}
+				<li class="admin-item admin-item--empty">Aucun lot</li>
+				{% endfor %}
+			</ul>
+
+
+			<nav class="ariane">
+				<ul class="ariane-list">
+					<li class="ariane-item"><a href="{{ path('admin') }}" class="ariane-link">admin</a></li>
+					<li class="ariane-item"><a href="{{ path('admin_ticket') }}" class="ariane-link">gestion des tickets</a></li>
+					<li class="ariane-item"><a href="#statuts" class="ariane-link">statuts</a></li>
+				</ul>
+			</nav>
+			<h2>Statuts de tickets</h2>
+			<ul class="admin">
+				{% for state in status %}
+				<li class="admin-item">
+					<a href="{{ path('admin_ticket_status_edit', { 'id': state.id }) }}" class="admin-link js-admin-edit" data-target="#js-admin-form-edit-status">
+						<span class="admin-id">{{ state.id }}</span>
+						{{ state.name }}
+						{% if state.color is not empty %} <span class="admin-color" title="{{ state.color }}" style="background-color: {{ state.color }}"></span>{% endif %}
+					</a>
+					<ul class="admin-actions">
+						<li class="admin-actions-item">
+							{% render(controller("NeralindTicketBundle:AdminStatus:erase", {'id': state.id})) %}
+						</li>
+					</ul>
+				</li>
+				{% else %}
+				<li class="admin-item admin-item--empty">Aucun statut</li>
+				{% endfor %}
+			</ul>
+
+			<nav class="ariane">
+				<ul class="ariane-list">
+					<li class="ariane-item"><a href="{{ path('admin') }}" class="ariane-link">admin</a></li>
+					<li class="ariane-item"><a href="{{ path('admin_ticket') }}" class="ariane-link">gestion des tickets</a></li>
+					<li class="ariane-item"><a href="#types" class="ariane-link">types</a></li>
+				</ul>
+			</nav>
+			<h2>Types de tickets</h2>
+			<ul class="admin">
+				{% for type in types %}
+				<li class="admin-item">
+					<a href="{{ path('admin_ticket_type_edit', { 'id': type.id }) }}" class="admin-link js-admin-edit" data-target="#js-admin-form-edit-type">
+						<span class="admin-id">{{ type.id }}</span>
+						{{ type.name }}
+					</a>
+					<ul class="admin-actions">
+						<li class="admin-actions-item">
+							{% render(controller("NeralindTicketBundle:AdminType:erase", {'id': type.id})) %}
+						</li>
+					</ul>
+				</li>
+				{% else %}
+				<li class="admin-item admin-item--empty">Aucun type</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div class="r-sm-4" data-fixed="top">
+			<div id="js-admin-form-edit-lot">
+				{% render(controller("NeralindTicketBundle:AdminLot:new")) %}
+			</div>
+
+			<div id="js-admin-form-edit-status">
+				{% render(controller("NeralindTicketBundle:AdminStatus:new")) %}
+			</div>
+
+			<div id="js-admin-form-edit-type">
+				{% render(controller("NeralindTicketBundle:AdminType:new")) %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}

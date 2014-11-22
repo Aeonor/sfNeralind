@@ -14,10 +14,4 @@ parameters:
     locale:            fr
     secret:            'neralindtokenismust#forall8'
     
-    node_path: 'C:\Program Files\nodejs\node.exe'
-    less_path: 'D:\Documents and Settings\mcastanheiro\Application Data\npm\node_modules'
-
-    #node_path: /usr/local/bin/node
-    #less_path: /usr/local/lib/node_modules
-
     cdn: http://cdn.neralind.com

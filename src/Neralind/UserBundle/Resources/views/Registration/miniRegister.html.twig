@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="register register--mini">
+	{% if error is defined and error %}
+	<div>{{ error|trans }}</div>
+	{% endif %}
+
+	<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form form--large">
+		{{ form_widget(form) }}
+		<div class="form-btn-list">
+			<input type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans }}" class="form-btn" />
+		</div>
+	</form>
+
+</div>

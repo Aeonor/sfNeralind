@@ -1,3 +1,8 @@
+neralind_media:
+    resource: "@NeralindMediaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 neralind_ticket:
     resource: "@NeralindTicketBundle/Controller/"
     type:     annotation

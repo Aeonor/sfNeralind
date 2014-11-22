@@ -49,10 +49,6 @@ assetic:
         yui_js:
             jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
         cssrewrite: ~
-        less:
-            node: %node_path%
-            node_paths: [%less_path%]
-            apply_to: "\.less$"
 
 # Doctrine Configuration
 doctrine:
@@ -98,7 +94,18 @@ doctrine:
                         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                         alias: GedmoTree # this one is optional and will default to the name set for the mapping
                         is_bundle: false
-                  
+
+services:
+    neralind_login_success_handler:
+        class:  Neralind\UserBundle\Component\Authentication\Handler\LoginSuccessHandler
+        arguments:  [@router, @security.context]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+    neralind_logout_success_handler:
+        class:  Neralind\UserBundle\Component\Authentication\Handler\LogoutSuccessHandler
+        arguments:  [@service_container, @router]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -112,7 +119,7 @@ fos_user:
     db_driver: orm 
     firewall_name: main
     user_class: Neralind\UserBundle\Entity\User
-    
+
 stof_doctrine_extensions:
     default_locale: fr_FR
     orm:

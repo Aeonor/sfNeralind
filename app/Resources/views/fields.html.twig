@@ -1,0 +1,53 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    <div class="form-field">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock form_row %}
+
+{% block form_label %}
+ 	{% set label_attr = label_attr|merge({'class': 'form-field-label'}) %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block form_widget_compound %}
+{% spaceless %}
+    <div {{ block('widget_container_attributes') }}>
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        {{ block('form_rows') }}
+        {{ form_rest(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block button_row %}
+{% spaceless %}
+    <div class="form-btn-list">
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock button_row %}
+
+{% block choice_widget_expanded -%}
+    {% if attr is not defined %}
+        {% set attr = {} %}
+    {% endif %}
+    {% set attr = attr|merge({'class': 'form-control form-field-radios'}) %}
+    <div {{ block('widget_container_attributes') }}>
+    {%- for child in form %}
+        {{- form_widget(child) -}}
+        {{- form_label(child) -}}
+    {% endfor -%}
+    </div>
+{% endblock choice_widget_expanded %}
+
+{% block user_selector_widget %}
+    {% set attr = attr|merge({'class': 'user-prefix js-user-search'}) %}
+    {{ block('form_widget_simple') }}
+{% endblock %}

@@ -1,0 +1,144 @@
+<?php
+
+namespace Neralind\TicketBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * Lot
+ *
+ * @ORM\Table(name="ticket_lot")
+ * @ORM\Entity(repositoryClass="Neralind\TicketBundle\Entity\LotRepository")
+ */
+class Lot
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+     /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", unique=true, length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="lot")
+     */
+    private $tickets;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Lot
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add tickets
+     *
+     * @param \Neralind\TicketBundle\Entity\Ticket $tickets
+     * @return Lot
+     */
+    public function addTicket(\Neralind\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets[] = $tickets;
+
+        return $this;
+    }
+
+    /**
+     * Remove tickets
+     *
+     * @param \Neralind\TicketBundle\Entity\Ticket $tickets
+     */
+    public function removeTicket(\Neralind\TicketBundle\Entity\Ticket $tickets)
+    {
+        $this->tickets->removeElement($tickets);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    public function __toString() {
+        return $this->getName();
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Lot
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+}

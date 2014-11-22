@@ -3,26 +3,41 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN_TICKET: ~ 
-        ROLE_ADMIN_TAG:    ~  
-        ROLE_ADMIN:        ROLE_USER, ROLE_ADMIN_TAG, ROLE_ADMIN_TICKET
+        ROLE_STAFF:        ROLE_USER
+        ROLE_MANAGER_TICKET: ~
+        ROLE_ADMIN_TICKET: ROLE_MANAGER_TICKET
+        ROLE_ADMIN_TAG:    ~
+        ROLE_ADMIN:        [ROLE_USER, ROLE_STAFF, ROLE_ADMIN_TAG, ROLE_ADMIN_TICKET]
         ROLE_SUPER_ADMIN:  ROLE_ADMIN
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
         main:
             pattern: ^/
+            #form_login:
+            #    provider: fos_userbundle
+            #    csrf_provider: form.csrf_provider
+            #logout:       true
+            #anonymous:    true
             form_login:
-                provider: fos_userbundle
+                provider:       fos_userbundle
                 csrf_provider: form.csrf_provider
-            logout:       true
-            anonymous:    true
+                login_path:     /login
+                use_forward:    true
+                check_path:     /login_check
+                success_handler: neralind_login_success_handler
+                failure_path:   null
+            logout: true
+            anonymous:  true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_STAFF }

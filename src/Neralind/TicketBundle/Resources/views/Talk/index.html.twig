@@ -1,0 +1,9 @@
+{# PARTIAL VIEW FOR NeralindTicketBundle:Ticket:index #}
+{% for entity in entities %}
+<div class="forum-item">
+    {% include "NeralindUserBundle::avatar.html.twig" with {'user': entity.creator } %}
+    <div class="forum-contents">
+        <p class="forum-contents-caption">{{ entity.contents }}</p>
+    </div>
+</div>
+{% endfor %}

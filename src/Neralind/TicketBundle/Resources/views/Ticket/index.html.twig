@@ -1,0 +1,76 @@
+{% extends '::layout.html.twig' %}
+
+{% set title = "Tickets" %}
+{% block body -%}
+<nav class="spacemenu">
+    <div class="r-container">
+        <a href="{{ path('ticket') }}" class="spacemenu-logo"><i class="icon-ticket spacemenu-logo-icon"></i> tickets</a>
+        <ul class="spacemenu-list">
+            {% for lot in lots %}
+            <li class="spacemenu-item"><a href="{{ path('ticket_lot', {'slug': lot.slug }) }}" class="spacemenu-link-text">{{ lot.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
+<div class="r-container">
+    <div class="r-row">
+        <div class="r-sm-8">
+            <nav class="ariane">
+                <ul class="ariane-list">
+                    <li class="ariane-item"><a href="{{ path('ticket') }}" class="ariane-link">tickets</a></li>
+                    {% if lot is defined and lot %}<li class="ariane-item"><a href="{{ path('ticket_lot', { 'slug': lot.slug }) }}" class="ariane-link">{{ lot.name }}</a></li>{% endif %}
+                </ul>
+            </nav>
+            <h1>{{ title }}</h1>
+            {% if lot is defined and lot %}<h2>{{ lot.name }}</h2>{% endif %}
+
+            <ul class="admin admin--100percent admin--collapsed" data-accordion>
+                {% for entity in entities %}
+                <li class="admin-item">
+                    <a href="{{ path('ticket_show', { 'id': entity.id }) }}" class="admin-link"{% if entity.status and entity.status.color %}style="background-color: {{ entity.status.color }}"{% endif %}>
+                        <div class="admin-aside">
+                            {% if entity.type %}{{ entity.type.name }}{% endif %}
+                            {% if entity.lot %} - <strong>{{ entity.lot.name }}</strong>{% endif %}
+                        </div>
+                        <span class="admin-id">{{ entity.id }}</span>
+                        {{ entity.name }}
+                    </a>
+                    <div class="admin-details">
+                        {% if is_granted('ROLE_MANAGER_TICKET') %}
+                            {% render(controller("NeralindTicketBundle:Ticket:edit", {'id': entity.id})) %}
+                        {% endif %}
+                        {% if entity.url %}<div class="admin-details-chapo"><i class="icon-link icon-small"></i> <a href="{{ entity.url }}">{{ entity.url }}</a></div>{% endif %}
+                        <p class="admin-details-contents"></p>
+
+                        <div class="forum-item">
+                            {% include "NeralindUserBundle::avatar.html.twig" with {'user': entity.creator } %}
+                                <div class="forum-contents">
+                                    <p class="forum-contents-caption">{{ entity.contents }}</p>
+                                </div>
+                        </div>
+
+                        {% for talk in entity.talks %}
+                            <div class="forum-item">
+                                {% include "NeralindUserBundle::avatar.html.twig" with {'user': talk.creator } %}
+                                <div class="forum-contents">
+                                    <p class="forum-contents-caption">{{ talk.contents }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="forum-item">
+                            {% include "NeralindUserBundle::avatar.html.twig" with {'user': app.user } %}
+                            {% render(controller("NeralindTicketBundle:Talk:new", { 'id': entity.id })) %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+                </div>
+
+                <div class="r-sm-4" data-fixed="top">
+                    {% render(controller("NeralindTicketBundle:Ticket:new")) %}
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
