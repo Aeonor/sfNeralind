@@ -2,29 +2,31 @@
 
 {% block body %}
 <div class="welcome welcome--home">
-    <ul class="welcome-list">
-        <li class="welcome-item">
-            <a href="#" class="welcome-link">
-                <h3 class="welcome-item-title">Les tags</h3>
-                <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
-                <button class="welcome-item-btn">en savoir plus</button>
-            </a>
-        </li>
-        <li class="welcome-item is-active">
-            <a href="#" class="welcome-link">
-                <h3 class="welcome-item-title">Rejoindre la communauté</h3>
-                <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
-                <button class="welcome-item-btn">en savoir plus</button>
-            </a>
-        </li>
-        <li class="welcome-item">
-            <a href="#" class="welcome-link">
-                <h3 class="welcome-item-title">Discussions</h3>
-                <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
-                <button class="welcome-item-btn">en savoir plus</button>
-            </a>
-        </li>
-    </ul>
+    <div class="r-container">
+        <ul class="r-row welcome-list">
+            <li class="r-xs-4 welcome-item">
+                <a href="#" class="welcome-link">
+                    <h3 class="welcome-item-title">Les tags</h3>
+                    <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
+                    <button class="btn welcome-item-btn">en savoir plus</button>
+                </a>
+            </li>
+            <li class="r-xs-4 welcome-item is-active">
+                <a href="#" class="welcome-link">
+                    <h3 class="welcome-item-title">Rejoindre la communauté</h3>
+                    <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
+                    <button class="btn welcome-item-btn">en savoir plus</button>
+                </a>
+            </li>
+            <li class="r-xs-4 welcome-item">
+                <a href="#" class="welcome-link">
+                    <h3 class="welcome-item-title">Discussions</h3>
+                    <p class="welcome-item-caption">Mauris non lorem accusaman, suscipit ante vitae, pellentesque ligula.</p>
+                    <button class="btn welcome-item-btn">en savoir plus</button>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="spacebar">
@@ -34,25 +36,25 @@
 </div>
 
 <div class="r-container">
-    <h1><strong>Neralind</strong>.com</h1>
+<h1>Neralind.com</h1>
 
-<div class="tag-mozaic">
-<ul class="tag-mozaic-list">
-    <?php       
-       $i = 1;
-        foreach($tags AS $tag): 
-    ?>
-    <li class="tag-mozaic-item tag-mozaic-item--<?php echo $i; ?>">
-        <a href="#" class="tag-mozaic-link">
-            <figure class="tag-thumbnail">
-                <img src="images/tags/<?php echo $tag['image'] ?>" alt="<?php echo $tag['name']?>" class="tag-thumbnail-picture picture-cover" />
-                <figcaption class="tag-thumbnail-caption tag-prefix"><?php echo $tag['name']; ?></figcaption>
-            </figure>
-        </a>
-    </li>
-    <?php $i++; endforeach; ?>
-</ul>
-</div>
+    <div class="tag-mozaic">
+        <ul class="tag-mozaic-list">
+            <?php       
+            $i = 1;
+            foreach($tags AS $tag): 
+                ?>
+            <li class="tag-mozaic-item tag-mozaic-item--<?php echo $i; ?>">
+                <a href="#" class="tag-mozaic-link">
+                    <figure class="tag-thumbnail">
+                        <img src="images/tags/<?php echo $tag['image'] ?>" alt="<?php echo $tag['name']?>" class="tag-thumbnail-picture picture-cover" />
+                        <figcaption class="tag-thumbnail-caption tag-prefix"><?php echo $tag['name']; ?></figcaption>
+                    </figure>
+                </a>
+            </li>
+            <?php $i++; endforeach; ?>
+        </ul>
+    </div>
 
 </div>
 

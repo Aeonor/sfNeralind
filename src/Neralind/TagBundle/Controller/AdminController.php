@@ -76,7 +76,7 @@ class AdminController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Créer le tag'));
+        $form->add('submit', 'submit', array('label' => 'Créer le tag', 'attr' => array('class' => 'btn')));
 
         return $form;
     }

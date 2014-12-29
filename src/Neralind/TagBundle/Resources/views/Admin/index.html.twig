@@ -20,15 +20,15 @@
 					{% for entity in entities %}
 					<li class="admin-item">
 						<a href="#" class="admin-link">
-							<div class="tag-prefix admin-title">{{ entity.name }}</div>
+							<div class="tag-prefix admin-title">{{ entity.name }} ({{ entity.slug }})</div>
 							<ul class="comas-listing">
-								<?php foreach($tag['synonyms'] AS $syn): ?>
-								<li class="tag-prefix"><?php echo $syn; ?></li>
-							<?php endforeach; ?>
+							{% for word in entity.redirectionWords %}
+								<li class="tag-prefix">{{ word.name }}</li>
+							{% endfor %}
 						</ul>
 					</a>
 					<ul class="admin-actions">
-						<li class="admin-actions-item"><a href="#" class="icon-delete icon-big">Supprimer</a></li>
+						<li class="admin-actions-item"><a href="#" class="icon-square icon-delete admin-actions-icon"></a></li>
 					</ul>
 				</li>
 				{% else %}

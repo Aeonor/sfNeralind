@@ -59,7 +59,7 @@ class AdminTypeController extends Controller
             'method' => 'POST',
             ));
 
-        $form->add('submit', 'submit', array('label' => 'créer un type'));
+        $form->add('submit', 'submit', array('label' => 'créer un type', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }
@@ -123,7 +123,7 @@ class AdminTypeController extends Controller
             'method' => 'PUT',
             ));
 
-        $form->add('submit', 'submit', array('label' => 'mettre à jour le type'));
+        $form->add('submit', 'submit', array('label' => 'mettre à jour le type', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }

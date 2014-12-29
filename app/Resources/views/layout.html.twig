@@ -6,22 +6,21 @@
     <meta name="application-name" content="Neralind"/>
     <meta name="description" content="Neralind.com, Communauté d'esprit. Spiritualité, sciences occultes, sorcellerie, chamanisme, bien-être, énergies." />
 
-
     <title>{% if title is defined %}{{ title|striptags }} - {% endif %}Neralind.com</title>
 
     <link rel="image_src" href="{{ asset('/ico.png', 'cdn') }}" />
     <link rel="icon" type="image/png" href="{{ asset('/ico.png', 'cdn') }}" />
-    <link rel="canonical" href="http://www.neralind.com"/>
-
+    <!--<link rel="canonical" href="http://www.neralind.com"/>-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css"  href="{{ asset('/stylesheets/styles.css', 'cdn') }}" media="screen, projection" />
 </head>
 
 <body {#
     #}{% if app.user is defined and app.user %}{#
         #}data-user-id="{{ app.user.id }}" {#
-        #}data-user-username="{{ app.user.username }}" {#   
-    #}{% endif %}{#    
-#}>
+        #}data-user-username="{{ app.user.username }}" {#
+    #}{% endif %}{#
+    #}>
     <div id="wrapper">
         <header class="l-header">
             <div class="r-container">
@@ -30,87 +29,87 @@
                 </a>
 
                 <nav class="l-menu">
-                    <ul class="l-menu-list">
-                        <li class="l-menu-item"><a href="#" class="l-menu-icon l-menu-icon-menu">Menu</a></li>
-                        <li class="l-menu-item"><a href="#tags" title="Page des tags" class="l-menu-icon l-menu-icon-tags">Les tags</a></li>
-                        <li class="l-menu-item"><a href="#contact" title="Contact" class="l-menu-icon l-menu-icon-contact">Contact</a></li>
-                        <li class="l-menu-item"><a href="#facebook" title="Page Facebook" class="l-menu-icon l-menu-icon-facebook">Facebook</a></li>
-                        <li class="l-menu-item"><a href="#twitter" title="Profil Twitter" class="l-menu-icon l-menu-icon-twitter">Twitter</a></li>
-                        <li class="l-menu-item"><a href="#help" title="Aide" class="l-menu-icon l-menu-icon-help">Aide</a></li>
-                    </ul>
-                </nav>
+                   <ul class="l-menu-list">
+                    <li class="l-menu-item"><a href="#" class="l-menu-icon l-menu-icon-menu">Menu</a></li>
+                    <li class="l-menu-item"><a href="#tags" title="Page des tags" class="icon-th-large icon-square l-menu-icon l-menu-icon-tags"></a></li>
+                    <li class="l-menu-item"><a href="#contact" title="Contact" class="icon-mail icon-square l-menu-icon"></a></li>
+                    <li class="l-menu-item"><a href="#facebook" title="Page Facebook" class="icon-facebook icon-square l-menu-icon"></a></li>
+                    <li class="l-menu-item"><a href="#twitter" title="Profil Twitter" class="icon-twitter icon-square l-menu-icon"></a></li>
+                    <li class="l-menu-item"><a href="#help" title="Aide" class="icon-info icon-square l-menu-icon"></a></li>
+                </ul>
+            </nav>
 
-                <form method="get" action="#" class="l-header-form form-search big">
-                    <div class="form-search-container">
-                        <input type="search" name="q" placeholder="Rechercher sur le site" class="form-search-input" />
-                        <button type="submit" value="Search" class="btn btn-light btn-search form-search-btn"><i class="icon-search"></i></button>
-                    </div>
-                </form>
+            <form method="get" action="#" class="l-header-form form-search big">
+                <div class="form-search-container">
+                    <input type="search" name="q" placeholder="Rechercher sur le site" class="form-search-input" />
+                    <button type="submit" value="Search" class="btn btn-light btn-search form-search-btn"><i class="icon-search"></i></button>
+                </div>
+            </form>
 
-            </div>
-        </header>
+        </div>
+    </header>
 
-        {% block body -%}{% endblock %}
+    {% block body -%}{% endblock %}
 
-        <footer class="l-footer">
-            <div class="r-container">
-                <ul class="r-row l-footer-list">
-                    <li class="r-sm-3 l-footer-item l-item-about">
-                        <div class="l-footer-title">À propos</div>
-                        <p>Neralind.com ; tous droits réservés. Association loi 1901 <a href="#">Neralind</a>.
-                            <nav class="l-footer-nav">
-                                <ul>
-                                    <li><a href="#">Plan du site</a></li>
-                                    <li><a href="#">Mentions légales</a></li>
-                                    <li><a href="{{ path('ticket') }}">Tickets</a></li>
-                                </ul>
-                            </nav>
-                        </li><li class="r-sm-3 l-footer-item l-footer-item-contents">
-                        <div class="l-footer-title">Derniers contenus</div>
+    <footer class="l-footer">
+        <div class="r-container">
+            <ul class="r-row l-footer-list">
+                <li class="r-sm-3 l-footer-item l-item-about">
+                    <div class="l-footer-title">À propos</div>
+                    <p>Neralind.com ; tous droits réservés. Association loi 1901 <a href="#">Neralind</a>.
                         <nav class="l-footer-nav">
                             <ul>
-                                <li><a href="#">Lorem ipsum sit amet</a></li>
-                                <li><a href="#">Quaercera</a></li>
-                                <li><a href="#">Sit amt equilibrum</a></li>
-                                <li><a href="#">Dictae ita rescue</a></li>
+                                <li><a href="#">Plan du site</a></li>
+                                <li><a href="#">Mentions légales</a></li>
+                                <li><a href="{{ path('ticket') }}">Tickets</a></li>
                             </ul>
                         </nav>
-                    </li><li class="r-sm-3 l-footer-item l-footer-item-discussions">
-                    <div class="l-footer-title">Discussions</div>
+                    </li><li class="r-sm-3 l-footer-item l-footer-item-contents">
+                    <div class="l-footer-title">Derniers contenus</div>
                     <nav class="l-footer-nav">
                         <ul>
                             <li><a href="#">Lorem ipsum sit amet</a></li>
-                            <li><a href="#">Dictae ita rescue Quaercera</a></li>
-                            <li><a href="#">Sit amt equilibrum</a></li>
                             <li><a href="#">Quaercera</a></li>
                             <li><a href="#">Sit amt equilibrum</a></li>
                             <li><a href="#">Dictae ita rescue</a></li>
                         </ul>
                     </nav>
-                </li><li class="r-sm-3 l-footer-item l-footer-item-navigation">
-                <form method="get" action="#" class="r-bottom form-search">
-                    <div class="form-search-container">
-                        <input type="search" name="q" placeholder="Rechercher sur le site" class="form-search-input" />
-                        <button type="submit" value="Search" class="btn btn-light btn-search form-search-btn"><i class="icon-search"></i></button>
-                    </div>
-                </form>
+                </li><li class="r-sm-3 l-footer-item l-footer-item-discussions">
+                <div class="l-footer-title">Discussions</div>
                 <nav class="l-footer-nav">
                     <ul>
-                        <li><a href="#">Les tags</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Aide</a></li>
+                        <li><a href="#">Lorem ipsum sit amet</a></li>
+                        <li><a href="#">Dictae ita rescue Quaercera</a></li>
+                        <li><a href="#">Sit amt equilibrum</a></li>
+                        <li><a href="#">Quaercera</a></li>
+                        <li><a href="#">Sit amt equilibrum</a></li>
+                        <li><a href="#">Dictae ita rescue</a></li>
                     </ul>
                 </nav>
-                <div class="l-footer-title">Suivez-nous</div>
-                <nav class="l-footer-nav l-footer-social">
-                    <ul>
-                        <li class="icon fb"><a href="#">Facebook</a></li>
-                        <li class="icon twitter"><a href="#">Twitter</a></li>
-                    </ul>
-                </nav>
-            </li>
-        </ul>
-    </div>    
+            </li><li class="r-sm-3 l-footer-item l-footer-item-navigation">
+            <form method="get" action="#" class="r-bottom form-search">
+                <div class="form-search-container">
+                    <input type="search" name="q" placeholder="Rechercher sur le site" class="form-search-input" />
+                    <button type="submit" value="Search" class="btn btn-light btn-search form-search-btn"><i class="icon-search"></i></button>
+                </div>
+            </form>
+            <nav class="l-footer-nav">
+                <ul>
+                    <li><a href="#">Les tags</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Aide</a></li>
+                </ul>
+            </nav>
+            <div class="l-footer-title">Suivez-nous</div>
+            <nav class="l-footer-nav l-footer-social">
+                <ul>
+                    <li class="icon fb"><a href="#">Facebook</a></li>
+                    <li class="icon twitter"><a href="#">Twitter</a></li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</div>
 </footer>
 
 </div>
@@ -118,26 +117,26 @@
 
 <!-- PLACEHOLDERS -->
 <div id="cache" class="cache">
-{% for type, messages in app.session.flashBag.all %}
-<div class="alert">
-    {% for message in messages %}
-    <div class="alert-item alert-item--{{ type }}">
-        {{ message }}
+    {% for type, messages in app.session.flashBag.all %}
+    <div class="alert">
+        {% for message in messages %}
+        <div class="alert-item alert-item--{{ type }}">
+            {{ message }}
+        </div>
+        {% endfor %}
     </div>
     {% endfor %}
-</div>
-{% endfor %}
 
-{% if ( not app.user ) %}
-<div class="col-sm-6" id="cache-login-form">
-    <h2 class="cache-title">&nbsp;<br />Connectez-vous</h2>
-    {% render(controller("NeralindUserBundle:Security:miniLogin")) %}
-</div>
-<div class="col-sm-6" id="cache-register-form">
-    <h2 class="cache-title">ou rejoignez la communauté</h2>
-    {% render(controller("NeralindUserBundle:Registration:miniRegister")) %}
-</div>
-{% endif %}
+    {% if ( not app.user ) %}
+    <div class="col-sm-6" id="cache-login-form">
+        <h2 class="cache-title">&nbsp;<br />Connectez-vous</h2>
+        {% render(controller("NeralindUserBundle:Security:miniLogin")) %}
+    </div>
+    <div class="col-sm-6" id="cache-register-form">
+        <h2 class="cache-title">ou rejoignez la communauté</h2>
+        {% render(controller("NeralindUserBundle:Registration:miniRegister")) %}
+    </div>
+    {% endif %}
 </div>
 
 <!-- JAVASCRIPTS -->

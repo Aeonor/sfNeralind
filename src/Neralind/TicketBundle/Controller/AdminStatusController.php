@@ -59,7 +59,7 @@ class AdminStatusController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'créer un statut'));
+        $form->add('submit', 'submit', array('label' => 'créer un statut', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }
@@ -124,7 +124,7 @@ class AdminStatusController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'mettre à jour le statut'));
+        $form->add('submit', 'submit', array('label' => 'mettre à jour le statut', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }

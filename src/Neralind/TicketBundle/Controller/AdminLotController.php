@@ -58,7 +58,7 @@ class AdminLotController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'créer un lot'));
+        $form->add('submit', 'submit', array('label' => 'créer un lot', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }
@@ -122,7 +122,7 @@ class AdminLotController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'mettre à jour le lot'));
+        $form->add('submit', 'submit', array('label' => 'mettre à jour le lot', 'attr'=> ['class' => 'btn']));
 
         return $form;
     }
